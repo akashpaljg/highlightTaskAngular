@@ -1,0 +1,38 @@
+.label-style{
+  font-size: 0.75rem;
+  color: #666666;
+  padding-bottom: 0.95rem;
+}
+.selectors-form {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: "QuickSand_Medium",'Courier New', Courier, monospace;
+  font-weight: 600;
+  margin: 2rem 0;
+}
+.selector-item{
+  margin: 2rem 0;
+  border-radius: 7px;
+  padding: 1px 0px;
+}
+.selectors-text-section{
+  background-color: #f3fbff;
+  color: #222222;
+  font-size: 1rem;
+  padding: 2rem 1rem;
+  width: 100%;
+  border-radius: 0.7rem;
+  margin: 1.5rem 0;
+  text-align: justify;
+  line-height: 1.5rem;
+}
+
+
+
+.highlighted {
+    border-radius: 7px;
+    background-color: rgba(238, 240, 231, 0.885);
+    border: 1px solid #ccc;
+    padding: 1px 0px;
+    cursor: pointer;
+  }

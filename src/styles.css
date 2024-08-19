@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    margin: 0;
+    padding: 0;
+}
+@font-face {
+    font-family:"QuickSand_Medium";
+    src: url("assets/Quicksand font 1/static/Quicksand-Medium.ttf");
+}

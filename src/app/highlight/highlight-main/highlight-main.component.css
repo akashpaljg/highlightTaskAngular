@@ -1,0 +1,30 @@
+/* main section */
+.main--section{
+    display: flex;
+    padding: 0.5% 1%;
+    background-color: #3c4e62;
+    align-items: center;
+}
+
+.box{
+    flex:1;
+    display: flex;
+    justify-content: center;
+}
+
+.title{
+    color: white;
+}
+
+.box:first-child > div { margin-right: auto; }
+
+.box:last-child  > div { margin-left: auto; }
+
+.buttons > button{
+    margin-right: 1rem;
+    background-color: #3fd28b;
+    color: black;
+    border: none;
+    padding: 0.3rem 1rem;
+    font-size: 1rem;
+}

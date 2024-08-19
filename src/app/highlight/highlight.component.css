@@ -1,0 +1,204 @@
+
+
+/* Question Properties section */
+.qp--section{
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    padding: 1rem;
+    border: 1px solid black;
+    
+}
+
+.qp--box:first-child, .qp--box:last-child{
+    flex: 1; /* Reduces space taken by the first and last boxes */
+    display: flex;
+    
+}
+
+.qp--box:first-child > a,.qp--box:last-child > a{
+    margin: 0 auto;
+    text-decoration: none;
+    color: black;
+}
+
+.qp--box:nth-child(2){
+    flex-grow: 2.7; /* Increases the space taken by the middle box, making the line longer */
+    display: flex;
+}
+
+.hr-line{
+    width: 100%; /* Full width of the box */
+    margin: 0 auto;
+}
+hr{
+    color: lightgray;
+}
+i{
+    background-color:  #3fd28b;
+    padding: 0.7rem;
+    border-radius: 50%;
+    font-size: 1rem;
+}
+
+/* form */
+.question--section{
+    width: 70%;
+    margin: 1.5rem auto 0.5rem;
+    padding: 1.2rem 1rem 1.5rem;
+    border: 1px solid black;
+}
+.label-style{
+    font-size: 0.75rem;
+    font-family: "QuickSand_Medium",'Courier New', Courier, monospace;
+    font-weight: 600;
+    color: #666666;
+}
+
+form{
+    width: 100%;
+}
+.steam-section > div > label:nth-child(1){
+    float: left;
+}
+
+.steam-section > div > label:nth-child(2){
+    float: right;
+}
+
+.mb-3{
+    margin-bottom: 3rem;
+}
+
+.mb-1{
+    margin-bottom: 1rem;
+}
+.steam-section > textarea,.text-phrase-section > textarea{
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #00000061;
+    font-size: 1rem;
+    color: #666666;
+    margin-top: 1rem;
+    resize: none;
+    height: 1.5rem;
+    overflow-y: hidden; /* to hide scroll bar */
+    line-height: 1.2rem;
+    min-height: 1.5rem;
+    box-sizing: border-box;
+    padding: 0px;
+    text-indent: 0px;
+    font-size: 1rem;
+    font-family: "QuickSand_Medium",'Courier New', Courier, monospace;
+    font-weight: 600;
+    color: #666666;
+}
+
+textarea::placeholder{
+    font-size: 1rem;
+    font-family: "QuickSand_Medium",'Courier New', Courier, monospace;
+    font-weight: 600;
+    color: #666666;
+}
+
+
+.radio-button-section{
+    margin-bottom: 1.4rem;
+}
+
+.radio-button-section .radio-buttons{
+    margin-top: 0.5rem;
+}
+
+.radio-buttons{
+    display: flex;
+    align-items: center;
+}
+
+.radio-buttons input[type="radio"] {
+    transform: scale(1.5); /* Adjust the scale factor as needed */
+    margin-right: 0.7rem; /* Maintain spacing after scaling */
+    accent-color: #1f7a54;
+    border-color: #1f7a54;
+}
+
+
+#word,#sentence,#paragraph,#custom{
+    border:2px solid white;
+    box-shadow:0 0 0 1.2px #1f7a54;
+    appearance:none;
+    border-radius:50%;
+    width:12px;
+    height:12px;
+    background-color:#fff;
+    /* transition:all ease-in 0.2s; */
+  
+  }
+  #word:checked,#sentence:checked,#paragraph:checked,#custom:checked{
+    background-color:#1f7a54;
+  }
+
+
+.radio-buttons label{
+    font-size: 1rem;
+    margin-right: 1.2rem;
+    font-family: "QuickSand_Medium",'Courier New', Courier, monospace;
+    font-weight: 600;
+}
+
+/* Answer Selected */
+#answer-select{
+    font-size: 1rem;
+    border: none;
+    border-bottom: 2px solid lightgray;
+    outline: none;
+    margin-left: 0.7rem;
+    background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23000000' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
+    background-position: calc(100% - 0.75rem) center !important;
+    -moz-appearance:none !important;
+    -webkit-appearance: none !important; 
+    appearance: none !important;
+    padding: 0.2rem 0 0.2rem;
+    padding-right: 1.6rem !important;
+    padding-left: 0.5rem;
+    font-family: "QuickSand_Medium",'Courier New', Courier, monospace;
+    font-weight: 600;
+}
+.answer-selected-section{
+    font-family: "QuickSand_Medium",'Courier New', Courier, monospace;
+    font-weight: 600;
+}
+
+/* Feedback section */
+.feedback--section{
+    width: 70%;
+    margin: 0 auto 1rem;
+    padding: 1.2rem 1rem;
+    border: 1px solid black;
+    text-transform: uppercase;
+    
+}
+
+/* Feedback section */
+.feedback--section > a{
+    text-decoration: none;
+    color: hsl(151, 62%, 54%);
+}
+
+/* Previous button */
+.previous-button{
+    margin: 2.5rem auto 4rem;
+    display: flex;
+    justify-content: center;
+    
+}
+.previous-button > button{
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 2px;
+    opacity: 1;
+    background-color: #3fd28b;
+    border: none;
+    padding: 0.3rem 0.7rem;
+}

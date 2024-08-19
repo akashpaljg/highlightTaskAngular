@@ -1,0 +1,11 @@
+<div class="selectors-form">
+<label class="label-style">Set Selections*</label>
+<div class="selectors-text-section highlight-container">
+      <ng-container *ngFor="let wordState of wordStates; let i = index">
+        <span class="selector-item" [class.highlighted]="wordState.isSelected" (click)="toggleSelection(i)">
+            {{ wordState.word }} 
+        </span>
+        <br *ngIf="wordState.word === '\n'">
+      </ng-container>
+  </div>
+</div>

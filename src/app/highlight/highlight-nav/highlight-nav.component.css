@@ -1,0 +1,22 @@
+/* nav section */
+.nav--section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5% 1.5%;
+    background-color:  #0B0B45;
+    align-items: center;
+}
+
+.navigate--links{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.navigate--links > a{
+    text-transform: uppercase;
+    margin-left: 1.5rem;
+    text-decoration: none;
+    color: #3fd28b;
+}
