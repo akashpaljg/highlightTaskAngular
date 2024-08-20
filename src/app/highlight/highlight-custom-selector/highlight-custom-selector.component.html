@@ -1,11 +1,25 @@
 <div class="selectors-form">
-<label class="label-style">Set Selections*</label>
-<div class="selectors-text-section highlight-container">
-      <ng-container *ngFor="let wordState of wordStates; let i = index">
-        <span class="selector-item" [class.highlighted]="wordState.isSelected" (click)="toggleSelection(i)">
-            {{ wordState.word }} 
-        </span>
-        <br *ngIf="wordState.word === '\n'">
-      </ng-container>
+  <div class="label-style form-labels">
+    <label class="">Set Selections*</label>
+    <div class="label-checkbox" [class.notVisible]="!visible">
+      <i class="fa-solid fa-rotate-right fa-lg" (click)="resetClick()"></i>
+      <label for="scales">Reset</label>
+    </div>
   </div>
+  <br>
+<div class="selectors-text-section highlight-container">
+  <ng-container *ngIf="visible; else noText">
+    <ng-container *ngFor="let wordState of wordStates; let i = index">
+      <span class="selector-item" [class.highlighted]="wordState.isSelected" (click)="toggleSelection(i)">
+          {{ wordState.word }} 
+      </span>
+      <ng-container *ngIf="wordState.word === '\n'">
+        <br>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+  <ng-template #noText>
+      <p class="no-text-section">No text phrase has been entered yet</p>
+    </ng-template>
+</div>
 </div>

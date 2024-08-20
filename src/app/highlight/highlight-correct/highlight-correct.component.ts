@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class HighlightCorrectComponent implements OnInit {
   private _selectors: { word: string, isSelected: boolean, isCorrect: boolean }[] | null = null;
+  private _visible:true|false = false;
   isChecked:true|false = false;
   isValueSelected:true|false = false;
 
@@ -23,6 +24,15 @@ export class HighlightCorrectComponent implements OnInit {
 
   get selectors(): { word: string, isSelected: boolean, isCorrect: boolean }[] | null {
     return this._selectors;
+  }
+
+  @Input()
+  set visible(value:true|false){
+    this._visible = value;
+  }
+
+  get visible():true|false{
+    return this._visible;
   }
 
   @Output() options: EventEmitter<{ word: string, isSelected: boolean, isCorrect: boolean }[] | null> = new EventEmitter<{ word: string, isSelected: boolean, isCorrect: boolean }[] | null>();

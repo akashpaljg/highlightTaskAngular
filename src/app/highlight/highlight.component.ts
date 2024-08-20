@@ -11,24 +11,24 @@ export class HighlightComponent implements OnInit {
   answerType: string = "";
   options: { word: string, isSelected: boolean, isCorrect: boolean }[] | null = null;
   isVisible: boolean = false;
-  selectedText: string = "";
   customType:true|false = false;
   totalCorrectAnswers:number[]|undefined = [0];
   collapseWord:true|false = false;
+  completeQuestion:any = {
+    question : "",
+    textPhrase: "",
+    options: [],
+    answersCount:0
+  };
 
-  constructor(private cdRef: ChangeDetectorRef) {
+  constructor() {
    
   }
 
   ngOnInit(): void {
   }
 
-  captureSelection() {
-    const selection = window.getSelection();
-    if (selection) {
-      this.selectedText = selection.toString();
-    }
-  }
+ 
 
   getSelector(textPhrase: string, answerType: string): { word: string, isSelected: boolean, isCorrect: boolean }[] | null {
     
@@ -167,6 +167,7 @@ export class HighlightComponent implements OnInit {
     } else {
       this.isVisible = false;
     }
+    console.log(`${this.question} ${this.textPhrase} ${this.answerType}`)
   }
 
   editOptions(options: { word: string, isSelected: boolean, isCorrect: boolean }[] | null) {
@@ -181,6 +182,8 @@ export class HighlightComponent implements OnInit {
       total = o.isCorrect ? total+1:total;
     });
     this.totalCorrectAnswers = Array.from({ length: total + 1 }, (_, i) => i);
+
+
     // this.totalCorrectAnswers.reverse();
   }
   

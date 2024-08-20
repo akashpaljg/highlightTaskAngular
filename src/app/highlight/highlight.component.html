@@ -64,9 +64,9 @@
     </div> -->
 
     <!-- Selectors -->
-    <highlight-selector *ngIf="!customType" [selectors]="options" (options)="editOptions($event)" [concateWord]="collapseWord"></highlight-selector>
-    <highlight-custom-selector *ngIf="customType" [selectors]="options" (options)="editOptions($event)" ></highlight-custom-selector>
-    <highlight-correct [selectors]="options"  (options)="editOptions($event)"></highlight-correct>
+    <highlight-selector *ngIf="!customType" [selectors]="options" (options)="editOptions($event)" [concateWord]="collapseWord" [visible]="isVisible"></highlight-selector>
+    <highlight-custom-selector *ngIf="customType" [selectors]="options" (options)="editOptions($event)" [visible]="isVisible"></highlight-custom-selector>
+    <highlight-correct [selectors]="options"  (options)="editOptions($event)" [visible]="isVisible"></highlight-correct>
     
     <!-- number of answer selected -->
      <div class="answer-selected-section">

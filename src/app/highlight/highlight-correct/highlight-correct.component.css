@@ -2,6 +2,7 @@
   font-size: 0.75rem;
   color: #666666;
 }
+
 .selectors-form {
     display: flex;
     flex-wrap: wrap;
@@ -70,9 +71,9 @@
   cursor: default;
 }
 
-.label-checkbox > label {
+/* .label-checkbox > label {
   cursor: pointer;
-}
+} */
 /* Form and checkbox labels */
 
   
@@ -113,4 +114,9 @@
     font-weight: 600;
     font-size: 0.8rem;
     color: #666666;
+  }
+
+  .notVisible{
+    opacity: 0.4;
+    cursor: default;
   }

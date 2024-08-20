@@ -13,6 +13,7 @@ interface WordState {
 })
 export class HighlightCustomComponent implements OnInit {
   private _originalSelectors: WordState[] = [];
+  private _visible:true|false = false;
   wordStates: WordState[] = [];
   isValueSelected:true|false = false;
 
@@ -27,6 +28,15 @@ export class HighlightCustomComponent implements OnInit {
 
   get selectors(): WordState[] | null {
     return this.wordStates;
+  }
+
+  @Input()
+  set visible(value:true|false){
+    this._visible = value;
+  }
+
+  get visible():true|false{
+    return this._visible;
   }
 
   @Output() options: EventEmitter<WordState[] | null> = new EventEmitter<WordState[] | null>();
@@ -154,5 +164,22 @@ export class HighlightCustomComponent implements OnInit {
       }
     });
     this.isValueSelected = false;
+  }
+
+  resetClick():void{
+    const selectedStates = this.wordStates
+    .filter(w => w.word.trim() !== '')
+    .filter(w=>w.isSelected);
+    if(selectedStates.length === 0){
+      alert("No value is selected");
+      return;
+    }
+    this.wordStates
+    .filter(w => w.word.trim() !== '')
+    .map(w=>{
+      w.isSelected = false;
+      w.isCorrect = false;  
+    });
+    this.options.emit(this.wordStates);
   }
 }

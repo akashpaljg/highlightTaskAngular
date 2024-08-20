@@ -15,6 +15,7 @@ interface WordState {
 export class HighlightSelectorComponent implements OnInit {
   private _originalSelectors: WordState[] = [];
   private _currentSelectors: WordState[] = [];
+  private _visibile:true|false = false;
   private _concateWord: true | false = false;
   isValueSelected:true|false = false;
   isChecked:true|false = false;
@@ -42,6 +43,15 @@ export class HighlightSelectorComponent implements OnInit {
 
   get concateWord(): true | false {
     return this._concateWord;
+  }
+
+  @Input()
+  set visible(value: true|false){
+    this._visibile = value;
+  }
+
+  get visible():true|false{
+    return this._visibile;
   }
 
   @Output() options: EventEmitter<WordState[] | null> = new EventEmitter<WordState[] | null>();

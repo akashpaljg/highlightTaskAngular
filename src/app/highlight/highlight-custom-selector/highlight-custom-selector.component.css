@@ -1,8 +1,14 @@
 .label-style{
   font-size: 0.75rem;
   color: #666666;
-  padding-bottom: 0.95rem;
+  /* padding-bottom: 0.95rem; */
 }
+.form-labels{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .selectors-form {
   display: flex;
   flex-wrap: wrap;
@@ -10,16 +16,20 @@
   font-weight: 600;
   margin: 2rem 0;
 }
-.selector-item{
+
+.selector-item {
+  /* padding: 1px 0px; */
+  margin: 1px 0px;
+  /* border-radius: 3px; */
+  /* cursor: pointer; */
+   /* Prevents text selection */
   margin: 2rem 0;
-  border-radius: 7px;
-  padding: 1px 0px;
 }
+
 .selectors-text-section{
   background-color: #f3fbff;
-  color: #222222;
-  font-size: 1rem;
   padding: 2rem 1rem;
+  color: #222222;
   width: 100%;
   border-radius: 0.7rem;
   margin: 1.5rem 0;
@@ -29,10 +39,38 @@
 
 
 
+
 .highlighted {
-    border-radius: 7px;
-    background-color: rgba(238, 240, 231, 0.885);
-    border: 1px solid #ccc;
-    padding: 1px 0px;
-    cursor: pointer;
+  background-color: rgba(238, 240, 231, 0.885);
+  border: 1px solid #ccc;
+  margin: 0px 2px;
   }
+
+  .notVisible{
+    opacity: 0.4;
+    cursor: default;
+  }
+
+/* Reset button */
+.label-checkbox{
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #1f7a54;
+  padding: 3px 0px;
+}
+
+/* Rotate right logo */
+.fa-rotate-right{
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+/* No text section */
+.no-text-section{
+  text-align: center;
+  font-family: "QuickSand_Medium",'Courier New', Courier, monospace;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #666666;
+}

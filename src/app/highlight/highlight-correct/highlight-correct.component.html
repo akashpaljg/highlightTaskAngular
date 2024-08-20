@@ -1,14 +1,14 @@
 <form class="selectors-form">
   <div class="label-style form-labels">
     <label class="">Set Correct Answers*</label>
-    <div class="label-checkbox">
-      <input type="checkbox" id="scales" name="scales" [disabled]="!isValueSelected" (change)="onCheck()" [checked]="isChecked" />
+    <div class="label-checkbox" [class.notVisible]="!visible">
+      <input type="checkbox" id="scales" name="scales" [disabled]="!visible" (change)="onCheck()" [checked]="isChecked" />
       <label for="scales">Select All</label>
     </div>
   </div>
   <br>
   <div class="correct-text-section">
-    <ng-container *ngIf="selectors && selectors.length > 0; else noText">
+    <ng-container *ngIf="visible; else noText">
       <ng-container *ngFor="let item of selectors; let i = index">
         <span class="selector-item" 
             [class.cursor]="item.isSelected"
