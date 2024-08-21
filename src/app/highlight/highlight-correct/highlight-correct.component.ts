@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { IOptions } from 'src/app/shared/interface';
 
 @Component({
   selector: 'highlight-correct',
@@ -6,13 +7,13 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./highlight-correct.component.css']
 })
 export class HighlightCorrectComponent implements OnInit {
-  private _selectors: { word: string, isSelected: boolean, isCorrect: boolean }[] | null = null;
+  private _selectors: IOptions[] | null = null;
   private _visible:true|false = false;
   isChecked:true|false = false;
   isValueSelected:true|false = false;
 
   @Input()
-  set selectors(value: { word: string, isSelected: boolean, isCorrect: boolean }[] | null) {
+  set selectors(value: IOptions[] | null) {
     // if(this._selectors !== value){
     if(!value){return;}
     this._selectors = value.map(item => ({ ...item }));
@@ -22,7 +23,7 @@ export class HighlightCorrectComponent implements OnInit {
     // }
   }
 
-  get selectors(): { word: string, isSelected: boolean, isCorrect: boolean }[] | null {
+  get selectors(): IOptions[] | null {
     return this._selectors;
   }
 
@@ -35,7 +36,7 @@ export class HighlightCorrectComponent implements OnInit {
     return this._visible;
   }
 
-  @Output() options: EventEmitter<{ word: string, isSelected: boolean, isCorrect: boolean }[] | null> = new EventEmitter<{ word: string, isSelected: boolean, isCorrect: boolean }[] | null>();
+  @Output() options: EventEmitter<IOptions[] | null> = new EventEmitter<IOptions[] | null>();
 
 
   constructor() {}

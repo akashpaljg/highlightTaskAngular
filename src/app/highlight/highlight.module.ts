@@ -9,6 +9,7 @@ import { HighlightSelectorComponent } from './highlight-selector/highlight-selec
 import { HighlightCorrectComponent } from './highlight-correct/highlight-correct.component';
 import { HighlightMainComponent } from './highlight-main/highlight-main.component';
 import { HighlightCustomComponent } from './highlight-custom-selector/highlight-custom-selector.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { HighlightCustomComponent } from './highlight-custom-selector/highlight-
   imports: [
     BrowserModule,
     FormsModule,
+    SharedModule,
     HighlightRoutingModule
   ]
 })

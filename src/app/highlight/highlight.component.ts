@@ -1,4 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { IQuestion } from '../shared/interface';
+import { Router } from '@angular/router';
+import { CoreService } from '../core.service';
+
 
 @Component({
   selector: 'app-highlight',
@@ -14,18 +18,25 @@ export class HighlightComponent implements OnInit {
   customType:true|false = false;
   totalCorrectAnswers:number[]|undefined = [0];
   collapseWord:true|false = false;
-  completeQuestion:any = {
+  isPreview:true|false = false;
+
+  completeQuestion:IQuestion = {
     question : "",
     textPhrase: "",
     options: [],
     answersCount:0
   };
 
-  constructor() {
-   
+  constructor(private router:Router,private service:CoreService) {
+    
   }
 
   ngOnInit(): void {
+  }
+
+  navigateToPreview(){
+    console.log("Clicked on Preview");
+    this.router.navigate(['/preview'])
   }
 
  
@@ -163,16 +174,29 @@ export class HighlightComponent implements OnInit {
       this.options = this.getSelector(this.textPhrase, this.answerType);
       // to update the correct answer count
       this.getCorrectAnswer(this.options);
+      this.completeQuestion.question = this.question;
+      this.completeQuestion.textPhrase = this.textPhrase;
       this.isVisible = true;  
     } else {
+      this.isPreview = false;
       this.isVisible = false;
     }
+
+    
+  
     console.log(`${this.question} ${this.textPhrase} ${this.answerType}`)
   }
 
   editOptions(options: { word: string, isSelected: boolean, isCorrect: boolean }[] | null) {
     this.options = options;
+    this.completeQuestion.options = options ? options : [];
     this.getCorrectAnswer(options);
+    this.isPreview = this.checkPreview(this.completeQuestion);
+    
+    this.service.setcompleteQuestion(this.completeQuestion);
+    console.log("Service got the data");
+
+    console.log(`Preview: ${this.isPreview}`);
   }
 
   getCorrectAnswer(options:any|null): void{
@@ -182,7 +206,7 @@ export class HighlightComponent implements OnInit {
       total = o.isCorrect ? total+1:total;
     });
     this.totalCorrectAnswers = Array.from({ length: total + 1 }, (_, i) => i);
-
+    this.completeQuestion.answersCount = this.totalCorrectAnswers.length;
 
     // this.totalCorrectAnswers.reverse();
   }
@@ -199,4 +223,15 @@ export class HighlightComponent implements OnInit {
       this.autoResize(event);
     }
   }
+
+  checkPreview(completeQuestion:IQuestion):true|false{
+    if(completeQuestion.question.trim().length === 0 && completeQuestion.textPhrase.trim().length === 0){
+      return false;
+    }
+    const selectedCount = completeQuestion.options.filter((o)=>o.isSelected).length;
+    const correctCount = completeQuestion.options.filter((o)=>o.isCorrect).length;
+    return selectedCount > 0 && correctCount > 0;
+  }
+
+  
 }

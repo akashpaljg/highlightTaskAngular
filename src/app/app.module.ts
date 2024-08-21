@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HighlightComponent } from './highlight/highlight.component';
 import { HighLightModule } from './highlight/highlight.module';
+import { PreviewComponent } from './preview/preview.component';
+import { PreviewModule } from './preview/preview.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,8 @@ import { HighLightModule } from './highlight/highlight.module';
   imports: [
     BrowserModule,
     HighLightModule,
-    AppRoutingModule,
+    PreviewModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

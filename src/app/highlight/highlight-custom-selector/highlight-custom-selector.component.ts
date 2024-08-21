@@ -1,10 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output, Renderer2, ElementRef } from '@angular/core';
+import { IOptions } from 'src/app/shared/interface';
 
-interface WordState {
-  word: string;
-  isSelected: boolean;
-  isCorrect: boolean;
-}
 
 @Component({
   selector: 'highlight-custom-selector',
@@ -12,13 +8,13 @@ interface WordState {
   styleUrls: ['./highlight-custom-selector.component.css']
 })
 export class HighlightCustomComponent implements OnInit {
-  private _originalSelectors: WordState[] = [];
+  private _originalSelectors: IOptions[] = [];
   private _visible:true|false = false;
-  wordStates: WordState[] = [];
+  wordStates: IOptions[] = [];
   isValueSelected:true|false = false;
 
 
-  @Input() set selectors(value: WordState[] | null) {
+  @Input() set selectors(value: IOptions[] | null) {
     console.log("Received at Highlight custom component");
     console.log(value);
     
@@ -26,7 +22,7 @@ export class HighlightCustomComponent implements OnInit {
     this._originalSelectors = value ? value.map(item => ({ ...item })) : [];
   }
 
-  get selectors(): WordState[] | null {
+  get selectors(): IOptions[] | null {
     return this.wordStates;
   }
 
@@ -39,7 +35,7 @@ export class HighlightCustomComponent implements OnInit {
     return this._visible;
   }
 
-  @Output() options: EventEmitter<WordState[] | null> = new EventEmitter<WordState[] | null>();
+  @Output() options: EventEmitter<IOptions[] | null> = new EventEmitter<IOptions[] | null>();
 
   constructor(private renderer: Renderer2, private el: ElementRef) {}
 
@@ -91,8 +87,8 @@ export class HighlightCustomComponent implements OnInit {
   updateSelectors(): void {
     if (!this.wordStates) { return; }
   
-    let newSelectors: WordState[] = [];
-    let currentGroup: WordState[] = [];
+    let newSelectors: IOptions[] = [];
+    let currentGroup: IOptions[] = [];
   
     for (let wordState of this.wordStates) {
       if (wordState.isSelected) {
@@ -113,7 +109,7 @@ export class HighlightCustomComponent implements OnInit {
     this.wordStates = newSelectors;
   }
   
-  mergeWordStates(group: WordState[]): WordState {
+  mergeWordStates(group: IOptions[]): IOptions {
     return {
       word: group.map(w => w.word).join(' '),
       isSelected: group[0].isSelected,
@@ -141,7 +137,7 @@ export class HighlightCustomComponent implements OnInit {
 
     this.options.emit(this.wordStates);
   }
-  getOriginalWords(mergedWord: string): WordState[] {
+  getOriginalWords(mergedWord: string): IOptions[] {
     const words = mergedWord.split(/(\s+)/)
     .map(word => word.trim())
     .filter(word => word.length > 0);

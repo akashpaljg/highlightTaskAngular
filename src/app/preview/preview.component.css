@@ -1,0 +1,25 @@
+.preview-section{
+    display:flex;
+    align-items:flex-start;
+  }
+  
+  .preview-section-heading{
+    margin-right:1rem;
+  }
+  
+  .preview-section-questions{
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+  }
+
+  .preview-section-questions-textPhrase{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .highlight {
+    background-color: yellow;
+    cursor: pointer;
+  }
+  

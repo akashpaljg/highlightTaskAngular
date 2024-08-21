@@ -1,10 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
-interface WordState {
-  word: string;
-  isSelected: boolean;
-  isCorrect: boolean;
-}
+import { IOptions } from 'src/app/shared/interface';
 
 @Component({
   selector: 'highlight-selector',
@@ -13,26 +8,24 @@ interface WordState {
 })
 
 export class HighlightSelectorComponent implements OnInit {
-  private _originalSelectors: WordState[] = [];
-  private _currentSelectors: WordState[] = [];
+  private _originalSelectors: IOptions[] = [];
+  private _currentSelectors: IOptions[] = [];
   private _visibile:true|false = false;
   private _concateWord: true | false = false;
-  isValueSelected:true|false = false;
   isChecked:true|false = false;
 
   @Input()
-  set selectors(value: WordState[] | null) {
+  set selectors(value: IOptions[] | null) {
     if (value) {
       this._originalSelectors = value.map(item => ({ ...item }));
       this._currentSelectors = value.map(item => ({ ...item }));
-      this.isValueSelected = value ? true:false;
       this.updateIsChecked();
     }
     
     console.log('Options received:', this._currentSelectors);
   }
 
-  get selectors(): WordState[] | null {
+  get selectors(): IOptions[] | null {
     return this._currentSelectors;
   }
 
@@ -54,7 +47,7 @@ export class HighlightSelectorComponent implements OnInit {
     return this._visibile;
   }
 
-  @Output() options: EventEmitter<WordState[] | null> = new EventEmitter<WordState[] | null>();
+  @Output() options: EventEmitter<IOptions[] | null> = new EventEmitter<IOptions[] | null>();
 
   constructor() {}
 
@@ -102,8 +95,8 @@ export class HighlightSelectorComponent implements OnInit {
   updateSelectors(): void {
     if (!this._currentSelectors) return;
 
-    let newSelectors: WordState[] = [];
-    let currentGroup: WordState[] = [];
+    let newSelectors: IOptions[] = [];
+    let currentGroup: IOptions[] = [];
 
     for (let wordState of this._currentSelectors) {
       if (wordState.isSelected) {
@@ -131,7 +124,7 @@ export class HighlightSelectorComponent implements OnInit {
     this._currentSelectors = newSelectors;
   }
 
-  mergeWordStates(group: WordState[]): WordState {
+  mergeWordStates(group: IOptions[]): IOptions {
     return {
       word: group.map(w => w.word).join(' '),
       isSelected: true,
@@ -139,7 +132,7 @@ export class HighlightSelectorComponent implements OnInit {
     };
   }
 
-  getOriginalWords(mergedWord: string): WordState[] {
+  getOriginalWords(mergedWord: string): IOptions[] {
     const words = mergedWord.split(/(\s+)/)
     .map(word => word.trim())
     .filter(word => word.length > 0);
@@ -154,7 +147,7 @@ export class HighlightSelectorComponent implements OnInit {
     });
   }
 
-  get currentSelectors(): WordState[] {
+  get currentSelectors(): IOptions[] {
     return this._currentSelectors;
   }
 

@@ -1,14 +1,28 @@
-<!-- nav section -->
- <highlight-nav></highlight-nav>
-
- <!-- main section -->
+<!-- main section -->
 <highlight-main></highlight-main>
+
+<!-- Highlight save and preview -->
+<div class="highlight-save-preview-section">
+    <div class="highlight-save-preview-heading">
+        Highlight <span class="highlight-save-preview-heading-metadata">(Locked)</span>
+    </div>
+    <div class="highlight-save-preview-buttons">
+        <button>
+            <i class="fa-solid fa-unlock highlight-save-preview-buttons-icon"></i>
+            Unlcok
+        </button>
+        <button [disabled]="!isPreview" (click)="navigateToPreview()" [class.cursor-pointer]="isPreview">
+            <i class="fa-solid fa-eye highlight-save-preview-buttons-icon" [class.disable]="!isPreview"></i>
+            Save and Preview
+        </button>
+    </div>
+</div>
 
  <!-- question properties and question content -->
  <div class="qp--section">
     <div class="qp--box">
         <a href="#">
-            <i class="fa-solid fa-pen"></i>
+            <i class="fa-solid fa-pen qp--section-icons"></i>
             Question Properties
         </a>
     </div>
@@ -20,7 +34,7 @@
     </div>
     <div class="qp--box ">
         <a href="#">
-            <i class="fa-solid fa-2"></i>
+            <i class="fa-solid fa-2 qp--section-icons"></i>
             Question Content
         </a>
         
