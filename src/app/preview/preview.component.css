@@ -27,6 +27,7 @@
     flex-wrap: wrap;
     text-align: justify;
     cursor: default;
+    font-size: 1.2rem;
   }
   
   .highlight {
@@ -47,4 +48,35 @@
   }
   .selector-item{
     margin: 0 0.3rem 0 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .selector-item-checking{
+    margin: 0 0.3rem 0.6rem 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .selector-item-heading{
+    padding: 0px 1rem 0px 0.5rem;
+    border:1px solid #035800;
+  }
+  .selector-item-svg{
+    width:20px;
+    background-color:#035800;
+    height: 1.5rem;
+    padding: 0.1rem;
+  }
+
+  .selector-incorrect-item-heading{
+    padding: 0px 1rem 0px 0.5rem;
+    border:1px solid #b00020;
+  }
+  .selector-incorrect-item-svg{
+    width:20px;
+    background-color:#b00020;
+    height: 1.5rem;
+    padding: 0.1rem;
   }
