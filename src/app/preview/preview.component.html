@@ -1,29 +1,35 @@
-<ng-container *ngIf="completeQuestion; else noQuestion">
-  <div class="preview-section">
-    <div class="preview-section-heading">Q.1</div>
-    <div class="preview-section-questions">
-      <div class="preview-section-questions-question">{{ completeQuestion.question }}</div>
-      <div class="preview-section-questions-textPhrase">
-        <ng-container *ngFor="let item of completeQuestion.options; let i = index">
-          <span
-            class="selector-item"
-            [ngClass]="{'highlight': items[i].isHover}"
-            (mouseover)="onMouseOver(item,i)"
-            (mouseout)="onMouseOut(i)"
-          >
-            {{ item.word }}
-          </span>
-          <!-- Handle line breaks or paragraph separations -->
-          <br *ngIf="item.word === '\n'" />
-        </ng-container>
-      </div>
-      <div class="preview-section-questions-check-button">
-        <button>Check</button>
+<div class="main-preview">
+  <ng-container *ngIf="completeQuestion; else noQuestion">
+    <div class="preview-section">
+      <div class="preview-section-heading">Q.1</div>
+      <div class="preview-section-questions">
+        <div class="preview-section-questions-question">{{ completeQuestion.question }}</div>
+        <div class="preview-section-questions-textPhrase">
+          <ng-container *ngFor="let item of completeQuestion.options; let i = index">
+            <ng-container *ngIf="item.word !== '\n'; else lineBreak">
+              <span
+                class="selector-item"
+                [ngClass]="getItemClasses(items[i],isChecking)"      
+                (mouseover)="onMouseOver(item,i)"
+                (mouseout)="onMouseOut(i)"
+                (click)="items[i].isHover && handleSelection(item,i)"
+              >
+                {{ item.word }} 
+              </span>
+            </ng-container>
+            <ng-template #lineBreak>
+              <br/>
+            </ng-template>
+          </ng-container>
+        </div>
+        <div class="preview-section-questions-check-button">
+          <button (click)="onChecking()">Check</button>
+        </div>
       </div>
     </div>
-  </div>
-</ng-container>
+  </ng-container>
 
-<ng-template #noQuestion>
-  <div>There are no questions</div>
-</ng-template>
+  <ng-template #noQuestion>
+    <div>There are no questions</div>
+  </ng-template>
+</div>

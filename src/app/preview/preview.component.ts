@@ -10,6 +10,7 @@ import { IOptions, IQuestion } from '../shared/interface';
 export class PreviewComponent implements OnInit {
   completeQuestion: IQuestion | null = null;
   items:{isHover:boolean,item?:IOptions}[] = [];
+  isChecking:true|false = false;
 
   bgColor:boolean[] = [];
 
@@ -20,6 +21,7 @@ export class PreviewComponent implements OnInit {
     this.completeQuestion?.options.map((q)=>{
       this.items.push({isHover:false});
     })
+    console.log(this.completeQuestion?.options);
   }
 
   onMouseOver(item: any,i:number): void {
@@ -30,7 +32,28 @@ export class PreviewComponent implements OnInit {
     }
   }
 
-  onMouseOut(i:number): void {
+  onMouseOut(i:number): void { 
     this.items[i].isHover = false;
   }
+
+  handleSelection(item:any,i:number){
+    if(this.items[i].item){
+      this.items[i].item = undefined;
+    }else{
+      this.items[i].item = item;
+    }
+  }
+
+    onChecking():void{
+      this.isChecking = true;
+    }
+
+    getItemClasses(item: any, isChecking: boolean): any {
+      return {
+        'highlight': (!isChecking && item.isHover) || item.item,
+        'green': item.item && isChecking && item.item?.isCorrect,
+        'red': item.item && isChecking && !item.item?.isCorrect
+      };
+    }
+    
 }

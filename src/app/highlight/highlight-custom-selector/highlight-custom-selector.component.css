@@ -19,11 +19,11 @@
 
 .selector-item {
   /* padding: 1px 0px; */
-  margin: 1px 0px;
+  /* margin: 1px 0px; */
   /* border-radius: 3px; */
   /* cursor: pointer; */
    /* Prevents text selection */
-  margin: 2rem 0;
+  /* margin: 2rem 0; */
 }
 
 .selectors-text-section{

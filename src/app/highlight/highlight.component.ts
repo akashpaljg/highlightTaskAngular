@@ -48,6 +48,7 @@ export class HighlightComponent implements OnInit {
 
     if (answerType === "word") {
       this.collapseWord = true;
+      
       return this.getWordOptions(textPhrase);
     } else if (answerType === "sentence") {
       return this.getSentenceOptions(textPhrase);
@@ -176,6 +177,7 @@ export class HighlightComponent implements OnInit {
       this.getCorrectAnswer(this.options);
       this.completeQuestion.question = this.question;
       this.completeQuestion.textPhrase = this.textPhrase;
+      this.completeQuestion.options = this.options?this.options:[];
       this.isVisible = true;  
     } else {
       this.isPreview = false;

@@ -1,3 +1,7 @@
+.main-preview{
+  width: 80%;
+  margin: 0 auto;
+}
 .preview-section{
     display:flex;
     align-items:flex-start;
@@ -14,12 +18,30 @@
   }
 
   .preview-section-questions-textPhrase{
+    color: #222222;
+    border-radius: 1rem;
+    margin: 1.5rem 0 2rem;
+    text-align: justify;
+    line-height: 1.5rem;
     display: flex;
     flex-wrap: wrap;
+    text-align: justify;
+    cursor: default;
   }
   
   .highlight {
     background-color: yellow;
     cursor: pointer;
   }
+  .green{
+    background-color: green;;
+  }
+  .red{
+    background-color: red;
+  }
   
+
+
+  .selector-item{
+    margin: 0 0.3rem 0 0;
+  }

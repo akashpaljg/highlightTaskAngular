@@ -19,6 +19,7 @@ export class HighlightSelectorComponent implements OnInit {
     if (value) {
       this._originalSelectors = value.map(item => ({ ...item }));
       this._currentSelectors = value.map(item => ({ ...item }));
+      console.log(this._currentSelectors);
       this.updateIsChecked();
     }
     
