@@ -1,6 +1,6 @@
 .main-preview{
   width: 80%;
-  margin: 0 auto;
+  margin: 1.5rem auto 0 1.5rem;
 }
 .preview-section{
     display:flex;
@@ -41,7 +41,10 @@
   }
   
 
-
+  .line-break {
+    width: 100%;
+    height: 0;
+  }
   .selector-item{
     margin: 0 0.3rem 0 0;
   }

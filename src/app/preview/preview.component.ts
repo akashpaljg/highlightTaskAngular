@@ -18,10 +18,15 @@ export class PreviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.completeQuestion = this.service.getCompleteQuestion();
+    this.initializeOptions();
+    console.log(this.completeQuestion?.options);
+  }
+
+  initializeOptions(){
+    this.items = [];
     this.completeQuestion?.options.map((q)=>{
       this.items.push({isHover:false});
     })
-    console.log(this.completeQuestion?.options);
   }
 
   onMouseOver(item: any,i:number): void {
@@ -44,8 +49,13 @@ export class PreviewComponent implements OnInit {
     }
   }
 
-    onChecking():void{
-      this.isChecking = true;
+    
+    toggleChecking():void{
+      this.isChecking = !this.isChecking;
+      if(!this.isChecking){
+        this.initializeOptions();
+      }
+      
     }
 
     getItemClasses(item: any, isChecking: boolean): any {

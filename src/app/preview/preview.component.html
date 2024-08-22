@@ -7,24 +7,68 @@
         <div class="preview-section-questions-textPhrase">
           <ng-container *ngFor="let item of completeQuestion.options; let i = index">
             <ng-container *ngIf="item.word !== '\n'; else lineBreak">
-              <span
-                class="selector-item"
-                [ngClass]="getItemClasses(items[i],isChecking)"      
-                (mouseover)="onMouseOver(item,i)"
-                (mouseout)="onMouseOut(i)"
-                (click)="items[i].isHover && handleSelection(item,i)"
-              >
-                {{ item.word }} 
-              </span>
+              <!-- Only Highlight -->
+              <ng-container *ngIf="!isChecking">
+                <span
+                  class="selector-item "
+                  [ngClass]="{'highlight': (!isChecking && items[i].isHover) || items[i].item}"
+                  (mouseover)="onMouseOver(item,i)"
+                  (mouseout)="onMouseOut(i)"
+                  (click)="items[i].isHover && handleSelection(item,i)"
+                >
+                  {{ item.word }} 
+                </span>
+                </ng-container>
+                <!-- Only Correct -->
+                <!-- 'green': items[i].item && isChecking && items[i].item?.isCorrect,
+                'red': items[i].item && isChecking && !items[i].item?.isCorrect -->
+                <ng-container *ngIf="isChecking">
+                  <ng-container *ngIf="!items[i].item">
+                    <span
+                        class="selector-item"
+                      >
+                        {{ item.word }} 
+                      </span>
+                  </ng-container>
+                    <ng-container *ngIf="items[i].item && items[i].item?.isCorrect">
+                      <span
+                        class="selector-item green"
+                      >
+                        {{ item.word }} 
+                      </span>
+                    </ng-container>
+                    <!-- Only Wrong -->
+                    <ng-container *ngIf="items[i].item && !items[i].item?.isCorrect">
+                      <span
+                        class="selector-item green"
+                      >
+                        {{ item.word }} 
+                      </span>
+                      </ng-container>
+                </ng-container>
+               
             </ng-container>
             <ng-template #lineBreak>
-              <br/>
+              <div class="line-break"></div>
+
             </ng-template>
           </ng-container>
         </div>
-        <div class="preview-section-questions-check-button">
-          <button (click)="onChecking()">Check</button>
+        <ng-container *ngIf="!isChecking;else tryAgain">
+          <div class="preview-section-questions-check-button">
+            <button (click)="toggleChecking()">Check</button>
+          </div>
+        </ng-container>
+       <ng-template #tryAgain>
+        <div class="preview-section-questions-notcheck-button">
+          <div class="preview-section-questions-check-button">
+            <button (click)="toggleChecking()">Try Again</button>
+          </div>
+          <div class="preview-section-questions-check-button">
+            <button >Show Correct Answers</button>
+          </div>
         </div>
+       </ng-template>
       </div>
     </div>
   </ng-container>
