@@ -1,0 +1,45 @@
+<div class="main-preview">
+  <ng-container *ngIf="completeQuestion; else noQuestion">
+    <div class="preview-section">
+      <div class="preview-section-heading">Q.1:</div>
+
+      <div class="preview-section-questions">
+        <div class="preview-section-questions-question">{{ completeQuestion.question }}</div>
+          <div class="preview-section-questions-textPhrase">
+            <ng-container *ngFor="let item of completeQuestion.options; let i = index">
+              <ng-container *ngIf="item.word !== '\n'; else lineBreak">
+                <span
+                [ngClass]="{'padding-right-1': isChecking && items[i].item?.isCorrect || isChecking && items[i].item && !items[i].item?.isCorrect}"
+                class="selector-items"
+                  (mouseover)="!isChecking && onMouseOver(item,i)"
+                  (mouseout)="!isChecking && onMouseOut(i)"
+                  (click)="!isChecking && items[i].isHover && handleSelection(item,i)"
+                >
+                <span [ngClass]="{
+                  'highlight': (!isChecking && items[i].isHover) || (!isChecking && items[i].item),
+                  'selector-item-correct':isChecking && items[i].item && items[i].item?.isCorrect,
+                  'selector-item-incorrect': isChecking && items[i].item && !items[i].item?.isCorrect}" >{{ item.word }}</span>
+                
+                <svg *ngIf="isChecking && items[i].item?.isCorrect" class="selector-item-svg" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
+                </svg>
+                <svg  *ngIf="isChecking  && items[i].item && !items[i].item?.isCorrect" class="selector-incorrect-item-svg" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+                </span>
+              </ng-container>
+              <ng-template #lineBreak>
+                <div class="line-break"></div>
+              </ng-template>
+            </ng-container>
+          </div>
+        <div class="preview-section-questions-check-button">
+          <button (click)="toggleChecking()">{{ isChecking ? 'Try Again' : 'Check' }}</button>
+          <button *ngIf="isChecking">Show Correct Answers</button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #noQuestion>
+    <div>There are no questions</div>
+  </ng-template>
+</div>
