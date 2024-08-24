@@ -33,7 +33,7 @@
           </div>
         <div class="preview-section-questions-check-button">
           <button (click)="toggleChecking()" [disabled]="!isCheckingEnabled" [class.disable]="!isCheckingEnabled">{{ isChecking ? 'Try Again' : 'Check' }}</button>
-          <button *ngIf="isChecking">Show Correct Answers</button>
+          <button *ngIf="isChecking" (click)="handleShowCorrectAnswer()">Show Correct Answers</button>
         </div>
       </div>
     </div>
@@ -43,3 +43,24 @@
     <div>There are no questions</div>
   </ng-template>
 </div>
+
+<!-- Correct answer -->
+ <ng-container *ngIf="showCorrectAnswer && completeQuestion">
+  <div class="correct-answer-section">
+    <div class="correct-answer-section-heading">
+      Correct Answer:
+    </div>
+    <div class="correct-answer-section-body">
+      <ng-container *ngFor="let item of completeQuestion.options; let i = index">
+        <ng-container *ngIf="item.word !== '\n'; else lineBreak">
+          <span class="selector-items"
+          [ngClass]="{'highlight': item.isCorrect}"
+          >{{item.word}}</span>
+        </ng-container>
+        <ng-template #lineBreak>
+          <div class="line-break"></div>
+        </ng-template>
+      </ng-container>
+    </div>
+  </div>
+ </ng-container>
