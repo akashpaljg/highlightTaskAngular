@@ -32,7 +32,7 @@
             </ng-container>
           </div>
         <div class="preview-section-questions-check-button">
-          <button (click)="toggleChecking()">{{ isChecking ? 'Try Again' : 'Check' }}</button>
+          <button (click)="toggleChecking()" [disabled]="!isCheckingEnabled" [class.disable]="!isCheckingEnabled">{{ isChecking ? 'Try Again' : 'Check' }}</button>
           <button *ngIf="isChecking">Show Correct Answers</button>
         </div>
       </div>

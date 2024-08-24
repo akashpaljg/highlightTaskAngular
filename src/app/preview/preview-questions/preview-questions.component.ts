@@ -11,6 +11,7 @@ export class PreviewQuestionsComponent implements OnInit {
   completeQuestion: IQuestion | null = null;
   items:{isHover:boolean,item?:IOptions}[] = [];
   isChecking:true|false = false;
+  isCheckingEnabled:boolean = false;
 
   bgColor:boolean[] = [];
 
@@ -47,6 +48,17 @@ export class PreviewQuestionsComponent implements OnInit {
     }else{
       this.items[i].item = item;
     }
+    this.checkingEnabled();
+  }
+
+  checkingEnabled(){
+    let check = false;
+    this.items.map((item)=>{
+      if(item.item){
+        check = true;
+      }
+    })
+    this.isCheckingEnabled = check;
   }
 
     
