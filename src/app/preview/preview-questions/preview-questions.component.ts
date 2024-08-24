@@ -73,7 +73,7 @@ export class PreviewQuestionsComponent implements OnInit {
       if(!this.isChecking){
         this.initializeOptions();
         this.checkingEnabled();
-        this.handleShowCorrectAnswer();
+        this.showCorrectAnswer = false;
       }
       
     }

@@ -33,7 +33,7 @@
           </div>
         <div class="preview-section-questions-check-button">
           <button (click)="toggleChecking()" [disabled]="!isCheckingEnabled" [class.disable]="!isCheckingEnabled">{{ isChecking ? 'Try Again' : 'Check' }}</button>
-          <button *ngIf="isChecking" (click)="handleShowCorrectAnswer()">Show Correct Answers</button>
+          <button *ngIf="isChecking" (click)="handleShowCorrectAnswer()">{{showCorrectAnswer ? 'Hide Correct Answer':'Show Correct Answer'}}</button>
         </div>
       </div>
     </div>

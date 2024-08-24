@@ -75,7 +75,7 @@
     border: 1px solid #035800;
     padding-left: 0.5rem;
     padding-right: 1rem;
-    line-height: 1.8rem;
+    line-height: 1.7rem;
    
     -webkit-box-decoration-break: clone;
 
@@ -89,8 +89,8 @@
   .selector-incorrect-item-svg {
     width: 20px;
     margin-bottom: -6.5px;
-    padding: 0.17rem;
-    height: 19.5px;
+    padding: 0.16rem;
+    height: 20px;
   }
   
   .selector-item-svg {
@@ -152,5 +152,5 @@
 .correct-answer-section-body{
   padding: 1rem 2rem 1rem 1rem;
   background-color: #E0F0FF;
-  
+  line-height: 1.5rem;
 }
