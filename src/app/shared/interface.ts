@@ -12,7 +12,8 @@ export interface IQuestion {
 }
 
 export interface INavLinks {
-  title:string
+  title?:string;
+  imageUrl?:string;
   url:string;
   isActive:boolean;
 }

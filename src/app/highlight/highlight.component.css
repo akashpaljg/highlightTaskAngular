@@ -264,8 +264,10 @@ textarea::placeholder{
 .previous-button > button{
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 2px;
-    opacity: 1;
     background-color: #3fd28b;
     border: none;
-    padding: 0.3rem 0.7rem;
+    padding: 0.4rem 0.7rem;
+    font-size: 1rem;
+    font-family: "QuickSand_Medium",'Courier New', Courier, monospace;
+    font-weight: 600;
 }

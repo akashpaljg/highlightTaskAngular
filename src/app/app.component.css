@@ -8,6 +8,8 @@
     background-color:  #0B0B45;
     align-items: center;
     list-style-type: none;
+    border: none;
+    border-bottom: 2px solid #31b9e4;
     
 }
 
@@ -33,15 +35,19 @@
     color: #ffffff;
 }
 
-.navigate--links  ul > li  > a:active{
-    color: #ffffff;
 
-}
-
-.active{
+.navigate--links  ul > li  > .active{
     color: #ffffff;
     border: none;
     padding: 1.1rem 1rem;
-    padding-bottom: 1.1rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 4px solid #ffffff;
+}
+
+.navigate--links  ul > li  > .imageActive{
+    color: #ffffff;
+    border: none;
+    height: 1rem;
+    padding: 1.1rem 1rem 1rem 1rem;
     border-bottom: 4px solid #ffffff;
 }
