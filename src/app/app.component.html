@@ -1,23 +1,22 @@
-<nav class="nav--section">
+<section class="nav--section">
   <div>
       <img src="assets/icons/logo used in header.svg" alt="Logo">
   </div>
   <div class="navigate--links">
-      <a href="#">Content</a>
-      <a href="#">Users</a>
-      <a href="#">Manage Site</a>
-      <!-- <a href="#">
-          <img src="assets/icons/alerts.svg" alt="">
-      </a> -->
-      <a href="#">
+    <ul>
+        <ng-container *ngFor="let item of navLinks">
+            <li><a href="#" [class.active]="item.isActive">{{item.title}}</a></li>
+        </ng-container>
+      <li><a href="#">
           <img src="assets/icons/alerts.svg" alt="Alerts">
-      </a>
-      <a href="#">
+      </a></li>
+      <li><a href="#">
           <img src="assets/icons/announcements.svg" alt="Announcements">
-      </a>
-      <a href="#">
+      </a></li>
+      <li><a href="#">
           <img src="assets/icons/account_circle.svg" alt="">
-      </a>
+      </a></li>
+    </ul>
   </div>
-</nav>
+</section>
 <router-outlet></router-outlet>

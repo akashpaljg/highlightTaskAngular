@@ -10,3 +10,9 @@ export interface IQuestion {
   options:IOptions[];
   answersCount:number;
 }
+
+export interface INavLinks {
+  title:string
+  url:string;
+  isActive:boolean;
+}
