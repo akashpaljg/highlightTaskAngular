@@ -25,6 +25,13 @@
    /* Prevents text selection */
   /* margin: 2rem 0; */
 }
+.selector-item {
+  display: inline;
+  white-space: normal;
+  word-break: break-all;
+  margin-right: 0.25rem;
+}
+
 
 .selectors-text-section{
   background-color: #f3fbff;
@@ -43,7 +50,8 @@
 .highlighted {
   background-color: rgba(238, 240, 231, 0.885);
   border: 1px solid #ccc;
-  margin: 0px 2px;
+  /* margin: 0px 0.25rem; */
+  /* margin-left: 0.; */
   }
 
   .notVisible{

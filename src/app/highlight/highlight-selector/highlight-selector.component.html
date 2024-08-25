@@ -12,11 +12,9 @@
     <ng-container *ngIf="visible; else noText">
       <ng-container *ngFor="let item of selectors; let i = index">
         <span *ngIf="item.word !== '\n'" 
-              class="selector-item" 
+              class="selector-items" 
               [class.selected]="item.isSelected"
-              (click)="toggleSelection(i)">
-          {{ item.word }}
-        </span>
+              (click)="toggleSelection(i)">{{ item.word }}</span>
         <br *ngIf="item.word === '\n'">
       </ng-container>
     </ng-container>

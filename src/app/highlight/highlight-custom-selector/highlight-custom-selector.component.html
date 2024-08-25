@@ -10,9 +10,7 @@
 <div class="selectors-text-section highlight-container">
   <ng-container *ngIf="visible; else noText">
     <ng-container *ngFor="let wordState of wordStates; let i = index">
-      <span class="selector-item" [class.highlighted]="wordState.isSelected" (click)="toggleSelection(i)">
-          {{ wordState.word }} 
-      </span>
+      <span class="selector-item" [class.highlighted]="wordState.isSelected" (click)="toggleSelection(i)">{{ wordState.word }}</span>
       <ng-container *ngIf="wordState.word === '\n'">
         <br>
       </ng-container>
