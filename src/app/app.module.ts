@@ -15,7 +15,6 @@ import { PreviewModule } from './preview/preview.module';
   imports: [
     BrowserModule,
     PreviewModule,
-    
     HighLightModule,
     AppRoutingModule
   ],

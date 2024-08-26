@@ -1,0 +1,65 @@
+<div>
+    <div class="question--section">
+            <form>
+                <div class="steam-section mb-3">
+                    <div>
+                        <label class="label-style" for="question">Question (Stem)*</label>
+                        <label class="label-style">* Fields are required</label>
+                    </div>
+                    <textarea type="text" name="question" placeholder="Enter Question (Stem)" (blur)="updateVisibility()" (change)="updateVisibility()" id="question" (input)="autoResize($event)"
+                    (keydown)="onEnter($event)" [(ngModel)]="question" rows="1"></textarea>
+                </div>
+                
+                <div class="text-phrase-section mb-3">
+                    <label for="textPhrase" class="label-style">Text Phrase*</label><br>
+                    <textarea type="text" name="textPhrase" placeholder="Enter Text Phrase" (blur)="updateVisibility()" (change)="updateVisibility()" id="textPhrase"  (input)="autoResize($event)"
+                    (keydown)="onEnter($event)" [(ngModel)]="textPhrase" rows="1"></textarea>
+                </div>
+                <div class="radio-button-section">
+                    <div class="label-style">Set Answer Type*</div>
+                        <div class="radio-buttons">
+                            <input type="radio" id="word" (change)="updateVisibility()" name="drone" value="word" [(ngModel)]="answerType" />
+                            <label for="word">Word</label>
+                            <input type="radio" id="sentence" (change)="updateVisibility()" name="drone" value="sentence" [(ngModel)]="answerType" />
+                            <label for="sentence">Sentence</label>
+                            <input type="radio" id="paragraph" (change)="updateVisibility()" name="drone" value="paragraph" [(ngModel)]="answerType" />
+                            <label for="paragraph">Paragraph</label>
+                            <input type="radio" id="custom" (change)="updateVisibility()" name="drone" value="custom" [(ngModel)]="answerType" />
+                            <label for="custom">Custom</label>
+                        </div>
+                    </div>
+            </form>
+
+            <!-- <div *ngIf="customType">
+                {{textPhrase}}
+            </div> -->
+
+            <!-- Selectors -->
+            <highlight-selector *ngIf="!customType"></highlight-selector>
+            <highlight-custom-selector *ngIf="customType" ></highlight-custom-selector>
+            <highlight-correct></highlight-correct>
+            
+            <!-- number of answer selected -->
+            <div class="answer-selected-section">
+                <label for="answer-select">Maximum number of answers that can be selected*:</label>
+                <select name="answer" id="answer-select">
+                    <option *ngFor="let answer of totalCorrectAnswers" [value]="answer" selected>{{answer}}</option>
+                </select>
+            </div>
+
+        
+
+    </div>
+
+    <!-- Add Feedback -->
+    <div class="feedback--section">
+        <a href="#">Add Feedback</a>
+    </div>
+
+    <!-- previous button -->
+    <div class="previous-button">
+        <button>
+            PREVIOUS
+        </button>
+    </div>
+</div>

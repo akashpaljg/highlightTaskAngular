@@ -10,15 +10,20 @@ import { HighlightMainComponent } from './highlight-main/highlight-main.componen
 import { HighlightCustomComponent } from './highlight-custom-selector/highlight-custom-selector.component';
 import { SharedModule } from '../shared/shared.module';
 import { HighlightSaveAndPreviewComponent } from './highlight-save-preview/highlight-save-preview.component';
+import { HighlightQuestionContentComponent } from './highlight-question-content/highlight-question-content.component';
+import { HighlightQuestionPropertiesComponent } from './highlight-question-properties/highlight-question-properties.component';
+
 
 @NgModule({
   declarations: [
     HighlightComponent,
+    HighlightQuestionContentComponent,
+    HighlightQuestionPropertiesComponent,
     HighlightSelectorComponent,
     HighlightCorrectComponent,
     HighlightMainComponent,
     HighlightSaveAndPreviewComponent,
-    HighlightCustomComponent
+    HighlightCustomComponent,
   ],
   imports: [
     BrowserModule,
