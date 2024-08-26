@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IQuestion } from '../shared/interface';
+import { IOptions, IQuestion } from '../shared/interface';
 import { Router } from '@angular/router';
 import { CoreService } from '../core.service';
-
 
 @Component({
   selector: 'app-highlight',
@@ -13,12 +12,10 @@ export class HighlightComponent implements OnInit {
   question: string = "";
   textPhrase: string = "";
   answerType: string = "";
-  options: { word: string, isSelected: boolean, isCorrect: boolean }[] | null = null;
+  options: IOptions[] | null = null;
   isVisible: boolean = false;
   customType:true|false = false;
   totalCorrectAnswers:number[]|undefined = [0];
-  collapseWord:true|false = false;
-  isPreview:true|false = false;
 
   completeQuestion:IQuestion = {
     question : "",
@@ -28,11 +25,19 @@ export class HighlightComponent implements OnInit {
   };
 
   constructor(private router:Router,private service:CoreService) {
-    
+    service.getOptions().subscribe((value)=>{
+      this.options = value;
+    });
+    service.getTotalCorrectAnswer().subscribe((value:number[])=>{
+      this.totalCorrectAnswers = value;
+    });
+    service.getVisibility().subscribe((value)=>{
+      this.isVisible = value;
+    })
   }
 
   ngOnInit(): void {
-    this.service.setisPreview(false);
+    this.service.setIsPreview(false);
   }
 
   navigateToPreview(){
@@ -42,14 +47,13 @@ export class HighlightComponent implements OnInit {
 
  
 
-  getSelector(textPhrase: string, answerType: string): { word: string, isSelected: boolean, isCorrect: boolean }[] | null {
+  getSelector(textPhrase: string, answerType: string): IOptions[] | null {
     
-    this.collapseWord = false;
+    this.service.setConcateWords(false);
     this.customType = false;
 
     if (answerType === "word") {
-      this.collapseWord = true;
-      
+      this.service.setConcateWords(true);
       return this.getWordOptions(textPhrase);
     } else if (answerType === "sentence") {
       return this.getSentenceOptions(textPhrase);
@@ -62,7 +66,7 @@ export class HighlightComponent implements OnInit {
     return null;
   }
 
-  getWordOptions(textPhrase: string): { word: string, isSelected: boolean, isCorrect: boolean }[] {
+  getWordOptions(textPhrase: string): IOptions[] {
     // Return an empty array if textPhrase is empty, null, or undefined
     if (!textPhrase || textPhrase.trim() === "") {
       return [];
@@ -94,11 +98,11 @@ export class HighlightComponent implements OnInit {
     }, []);
   }
 
-  getSentenceOptions(textPhrase: string): { word: string, isSelected: boolean, isCorrect: boolean }[] {
+  getSentenceOptions(textPhrase: string): IOptions[] {
     // Split the text by paragraphs first
     const paragraphs: string[] = textPhrase.split(/\n+/);
   
-    let sentenceOptions: { word: string, isSelected: boolean, isCorrect: boolean }[] = [];
+    let sentenceOptions: IOptions[] = [];
   
     paragraphs.forEach(paragraph => {
       // Use a regular expression to split the paragraph into sentences, keeping the full stops
@@ -128,12 +132,12 @@ export class HighlightComponent implements OnInit {
     return sentenceOptions;
   }
 
-  getParagraphOptions(textPhrase: string): { word: string, isSelected: boolean, isCorrect: boolean }[] {
+  getParagraphOptions(textPhrase: string): IOptions[] {
     // Split the text into paragraphs using one or more newline characters as the delimiter
     const paragraphOptions: string[] = textPhrase.split(/\n+/);
   
     // Map each paragraph into the required structure
-    let result: { word: string, isSelected: boolean, isCorrect: boolean }[] = [];
+    let result: IOptions[] = [];
   
     paragraphOptions.forEach((paragraph, index) => {
       // Trim the paragraph to remove leading/trailing whitespace
@@ -160,8 +164,8 @@ export class HighlightComponent implements OnInit {
     return result;
   }
 
-  getCustomOptions(textPhrase: string): { word: string, isSelected: boolean, isCorrect: boolean }[] | null {
-    // const customOptions: { word: string, isSelected: boolean, isCorrect: boolean }[] = [];
+  getCustomOptions(textPhrase: string): IOptions[] | null {
+    // const customOptions: IOptions[] = [];
     this.customType = true;
     // alert(this.customType);
     return [{
@@ -175,14 +179,16 @@ export class HighlightComponent implements OnInit {
     if (this.question !== "" && this.textPhrase !== "" && this.answerType !== "") {
       this.options = this.getSelector(this.textPhrase, this.answerType);
       // to update the correct answer count
-      this.getCorrectAnswer(this.options);
+      if(this.options) this.service.setOptions(this.options);
+      
       this.completeQuestion.question = this.question;
       this.completeQuestion.textPhrase = this.textPhrase;
       this.completeQuestion.options = this.options?this.options:[];
-      this.isVisible = true;  
+      this.service.setCompleteQuestion(this.completeQuestion);
+      this.service.setVisibility(true);
     } else {
-      this.service.setisPreview(false);
-      this.isVisible = false;
+      this.service.setIsPreview(false);
+      this.service.setVisibility(false);
     }
 
     
@@ -190,30 +196,6 @@ export class HighlightComponent implements OnInit {
     console.log(`${this.question} ${this.textPhrase} ${this.answerType}`)
   }
 
-  editOptions(options: { word: string, isSelected: boolean, isCorrect: boolean }[] | null) {
-    this.options = options;
-    this.completeQuestion.options = options ? options : [];
-    this.getCorrectAnswer(options);
-    this.service.setisPreview(this.checkPreview(this.completeQuestion));
-    
-    this.service.setcompleteQuestion(this.completeQuestion);
-    console.log("Service got the data");
-
-    console.log(`Preview: ${this.isPreview}`);
-  }
-
-  getCorrectAnswer(options:any|null): void{
-    let total = 0;
-    if(!options){return;}
-    options?.map((o:{ word: string, isSelected: boolean, isCorrect: boolean })=>{
-      total = o.isCorrect ? total+1:total;
-    });
-    this.totalCorrectAnswers = Array.from({ length: total + 1 }, (_, i) => i);
-    this.completeQuestion.answersCount = this.totalCorrectAnswers.length;
-
-    // this.totalCorrectAnswers.reverse();
-  }
-  
 
   autoResize(event: Event): void {
     const textarea = event.target as HTMLTextAreaElement;
@@ -225,15 +207,6 @@ export class HighlightComponent implements OnInit {
     if (event.key === 'Enter') {
       this.autoResize(event);
     }
-  }
-
-  checkPreview(completeQuestion:IQuestion):true|false{
-    if(completeQuestion.question.trim().length === 0 && completeQuestion.textPhrase.trim().length === 0){
-      return false;
-    }
-    const selectedCount = completeQuestion.options.filter((o)=>o.isSelected).length;
-    const correctCount = completeQuestion.options.filter((o)=>o.isCorrect).length;
-    return selectedCount > 0 && correctCount > 0;
   }
 
   

@@ -32,18 +32,28 @@
   margin-right: 0.25rem;
 }
 
+.selector-main-body{
+  margin: 1.5rem 0;
+  width: 100%;
+}
 
 .selectors-text-section{
   background-color: #f3fbff;
   padding: 2rem 1rem;
   color: #222222;
-  width: 100%;
   border-radius: 0.7rem;
-  margin: 1.5rem 0;
+ 
   text-align: justify;
   line-height: 1.5rem;
 }
 
+.validateError{
+  position: absolute;
+  color: #b00020;
+  font-size: 12px;
+  font-family: "QuickSand_Medium",'Courier New', Courier, monospace;
+  margin-top: 0.5rem;
+}
 
 
 

@@ -8,40 +8,28 @@ import { IOptions } from 'src/app/shared/interface';
   styleUrls: ['./highlight-correct.component.css']
 })
 export class HighlightCorrectComponent implements OnInit {
-  private _selectors: IOptions[] | null = null;
+  _selectors: IOptions[] | null = null;
   private _visible:true|false = false;
   isChecked:true|false = false;
   isValueSelected:true|false = false;
   isDisableSelect:boolean = true;
+  visible:boolean = false;
 
-  @Input()
-  set selectors(value: IOptions[] | null) {
-    // if(this._selectors !== value){
-    if(!value){return;}
-    this._selectors = value.map(item => ({ ...item }));
-    this.isValueSelected = true;
-    this.updateIsChecked();
-    console.log('Options received at correct side:', this._selectors);
-    // }
+
+  
+
+
+  constructor(private service:CoreService) {
+    service.getOptions().subscribe((value)=>{
+      if(!value){return;}
+      this._selectors = value.map(item => ({ ...item }));
+      this.isValueSelected = true;
+      this.updateIsChecked();
+    })
+    service.getVisibility().subscribe((value)=>{
+      this.visible = value;
+    })
   }
-
-  get selectors(): IOptions[] | null {
-    return this._selectors;
-  }
-
-  @Input()
-  set visible(value:true|false){
-    this._visible = value;
-  }
-
-  get visible():true|false{
-    return this._visible;
-  }
-
-  @Output() options: EventEmitter<IOptions[] | null> = new EventEmitter<IOptions[] | null>();
-
-
-  constructor(private service:CoreService) {}
 
   ngOnInit(): void {
     console.log("Recieved at correct");
@@ -60,7 +48,7 @@ export class HighlightCorrectComponent implements OnInit {
         }
         this.updateIsChecked();
         this.handleCorrectClick();
-      this.options.emit(this._selectors);
+        this.service.setOptions(this._selectors);
     }
   }
 
@@ -80,8 +68,7 @@ export class HighlightCorrectComponent implements OnInit {
     .filter(w => w.word.trim() !== '') 
     .filter(w=>w.isSelected === true) 
     .map(w => w.isCorrect = true);
-
-    this.options.emit(this._selectors);
+    this.service.setOptions(this._selectors);
   }
 
   clearSelection():void{
@@ -89,7 +76,7 @@ export class HighlightCorrectComponent implements OnInit {
     this._selectors
     .filter(w => w.word.trim() !== '')  
     .map(w => w.isCorrect=false);
-    this.options.emit(this._selectors);
+    this.service.setOptions(this._selectors);
   }
 
   updateIsChecked(): void {

@@ -11,7 +11,7 @@
   <div class="selector-main-body">
     <div class="selectors-text-section">
       <ng-container *ngIf="visible; else noText">
-        <ng-container *ngFor="let item of selectors; let i = index">
+        <ng-container *ngFor="let item of _currentSelectors; let i = index">
           <span *ngIf="item.word !== '\n'" 
                 class="selector-items" 
                 [class.selected]="item.isSelected"

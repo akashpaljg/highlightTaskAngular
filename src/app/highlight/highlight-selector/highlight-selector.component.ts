@@ -10,52 +10,33 @@ import { IOptions } from 'src/app/shared/interface';
 
 export class HighlightSelectorComponent implements OnInit {
   private _originalSelectors: IOptions[] = [];
-  private _currentSelectors: IOptions[] = [];
-  private _visibile:true|false = false;
+  _currentSelectors: IOptions[] = [];
+  visible:boolean = false;
   private _concateWord: true | false = false;
   isChecked:true|false = false;
   validateSelect:boolean = false;
 
-  @Input()
-  set selectors(value: IOptions[] | null) {
-    if (value) {
-      this._originalSelectors = value.map(item => ({ ...item }));
-      this._currentSelectors = value.map(item => ({ ...item }));
-      console.log(this._currentSelectors);
-      this.updateIsChecked();
-    }
-    
-    console.log('Options received:', this._currentSelectors);
-  }
+ 
 
-  get selectors(): IOptions[] | null {
-    return this._currentSelectors;
-  }
+ 
 
-  @Input()
-  set concateWord(value: true | false) {
-    this._concateWord = value;
-  }
-
-  get concateWord(): true | false {
-    return this._concateWord;
-  }
-
-  @Input()
-  set visible(value: true|false){
-    this._visibile = value;
-  }
-
-  get visible():true|false{
-    return this._visibile;
-  }
-
-  @Output() options: EventEmitter<IOptions[] | null> = new EventEmitter<IOptions[] | null>();
 
   constructor(private service:CoreService) {
     service.validateSelect.subscribe((value)=>{
       this.validateSelect = value;
     });
+    service.getOptions().subscribe((value)=>{
+      this._originalSelectors = value.map(item => ({ ...item }));
+      this._currentSelectors = value.map(item => ({ ...item }));
+      console.log('Options received:', this._currentSelectors);
+      this.updateIsChecked();
+    })
+    service.getVisibility().subscribe((value)=>{
+      this.visible = value;
+    })
+    service.getConcateWords().subscribe((value)=>{
+      this._concateWord = value;
+    })
   }
 
   ngOnInit(): void {
@@ -89,7 +70,7 @@ export class HighlightSelectorComponent implements OnInit {
     // }
     // this.isValueSelectedFunc();
     this.updateIsChecked();
-    this.options.emit(this._currentSelectors);
+    this.service.setOptions(this._currentSelectors);
   
   }
 
@@ -99,60 +80,60 @@ export class HighlightSelectorComponent implements OnInit {
     }
   }
 
-  updateSelectors(): void {
-    if (!this._currentSelectors) return;
+  // updateSelectors(): void {
+  //   if (!this._currentSelectors) return;
 
-    let newSelectors: IOptions[] = [];
-    let currentGroup: IOptions[] = [];
+  //   let newSelectors: IOptions[] = [];
+  //   let currentGroup: IOptions[] = [];
 
-    for (let wordState of this._currentSelectors) {
-      if (wordState.isSelected) {
-        // If the word is selected, add it to the current group
-        currentGroup.push(wordState);
-      } else {
-        // If the word is not selected, merge the current group if it's not empty,
-        // then add the unselected word as a standalone item
-        if (currentGroup.length > 0) {
-          newSelectors.push(this.mergeWordStates(currentGroup));
-          currentGroup = [];
-        }
-        newSelectors.push(wordState);
-      }
-    }
+  //   for (let wordState of this._currentSelectors) {
+  //     if (wordState.isSelected) {
+  //       // If the word is selected, add it to the current group
+  //       currentGroup.push(wordState);
+  //     } else {
+  //       // If the word is not selected, merge the current group if it's not empty,
+  //       // then add the unselected word as a standalone item
+  //       if (currentGroup.length > 0) {
+  //         newSelectors.push(this.mergeWordStates(currentGroup));
+  //         currentGroup = [];
+  //       }
+  //       newSelectors.push(wordState);
+  //     }
+  //   }
 
-    // After the loop, merge any remaining selected words
-    if (currentGroup.length > 0) {
-      newSelectors.push(this.mergeWordStates(currentGroup));
-    }
+  //   // After the loop, merge any remaining selected words
+  //   if (currentGroup.length > 0) {
+  //     newSelectors.push(this.mergeWordStates(currentGroup));
+  //   }
 
-    console.log(newSelectors);
+  //   console.log(newSelectors);
 
-    // Update the _currentSelectors with the new selectors
-    this._currentSelectors = newSelectors;
-  }
+  //   // Update the _currentSelectors with the new selectors
+  //   this._currentSelectors = newSelectors;
+  // }
 
-  mergeWordStates(group: IOptions[]): IOptions {
-    return {
-      word: group.map(w => w.word).join(' '),
-      isSelected: true,
-      isCorrect: group.every(w => w.isCorrect)
-    };
-  }
+  // mergeWordStates(group: IOptions[]): IOptions {
+  //   return {
+  //     word: group.map(w => w.word).join(' '),
+  //     isSelected: true,
+  //     isCorrect: group.every(w => w.isCorrect)
+  //   };
+  // }
 
-  getOriginalWords(mergedWord: string): IOptions[] {
-    const words = mergedWord.split(/(\s+)/)
-    .map(word => word.trim())
-    .filter(word => word.length > 0);
+  // getOriginalWords(mergedWord: string): IOptions[] {
+  //   const words = mergedWord.split(/(\s+)/)
+  //   .map(word => word.trim())
+  //   .filter(word => word.length > 0);
 
-    return words.map(word => {
-      const originalWord = this._originalSelectors.find(w => w.word === word);
-      return {
-        word: word,
-        isSelected: false,
-        isCorrect: originalWord ? originalWord.isCorrect : false
-      };
-    });
-  }
+  //   return words.map(word => {
+  //     const originalWord = this._originalSelectors.find(w => w.word === word);
+  //     return {
+  //       word: word,
+  //       isSelected: false,
+  //       isCorrect: originalWord ? originalWord.isCorrect : false
+  //     };
+  //   });
+  // }
 
   get currentSelectors(): IOptions[] {
     return this._currentSelectors;
@@ -171,15 +152,14 @@ export class HighlightSelectorComponent implements OnInit {
     this._currentSelectors
     .filter(w => w.word.trim() !== '')  
     .map(w => w.isSelected = true);
-
-    this.options.emit(this._currentSelectors);
+    this.service.setOptions(this._currentSelectors);
   }
 
   clearSelection():void{
     this._currentSelectors
     .filter(w => w.word.trim() !== '')  
     .map(w => {w.isSelected = false;w.isCorrect=false;});
-    this.options.emit(this._currentSelectors);
+    this.service.setOptions(this._currentSelectors);
   }
 
   updateIsChecked():void{

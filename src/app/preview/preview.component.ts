@@ -17,7 +17,9 @@ export class PreviewComponent implements OnInit {
   constructor(private service: CoreService) {}
 
   ngOnInit(): void {
-    this.completeQuestion = this.service.getCompleteQuestion();
+    this.service.getCompleteQuestion().subscribe((value)=>{
+      this.completeQuestion = value;
+    });
     this.initializeOptions();
     console.log(this.completeQuestion?.options);
   }

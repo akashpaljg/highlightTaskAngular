@@ -13,7 +13,7 @@ export class HighlightSaveAndPreviewComponent implements OnInit {
     isPreview:boolean = false;
 
     constructor(private service:CoreService,private router:Router){
-        service.getisPreview().subscribe((value:boolean)=>{
+        service.getIsPreview().subscribe((value:boolean)=>{
             this.isPreview = value;
         })
     }

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output, Renderer2, ElementRef } from '@angular/core';
+import { CoreService } from 'src/app/core.service';
 import { IOptions } from 'src/app/shared/interface';
 
 
@@ -9,35 +10,29 @@ import { IOptions } from 'src/app/shared/interface';
 })
 export class HighlightCustomComponent implements OnInit {
   private _originalSelectors: IOptions[] = [];
-  private _visible:true|false = false;
   wordStates: IOptions[] = [];
   isValueSelected:true|false = false;
+  visible:boolean = false;
+  validateSelect:boolean = false;
+  
 
+  constructor(private renderer: Renderer2, private el: ElementRef,private service:CoreService) {
+    service.getVisibility().subscribe((value)=>{
+      this.visible = value;
+    })
 
-  @Input() set selectors(value: IOptions[] | null) {
-    console.log("Received at Highlight custom component");
-    console.log(value);
-    
-    this.wordStates = value ? value.map(item => ({ ...item })) : [];
-    this._originalSelectors = value ? value.map(item => ({ ...item })) : [];
+    service.getOptions().subscribe((value)=>{
+      console.log("Received at Highlight custom component");
+      console.log(value);
+      
+      this.wordStates = value ? value.map(item => ({ ...item })) : [];
+      this._originalSelectors = value ? value.map(item => ({ ...item })) : [];
+    })
+
+    service.getValidateSelect().subscribe((value)=>{
+      this.validateSelect = value;
+    })
   }
-
-  get selectors(): IOptions[] | null {
-    return this.wordStates;
-  }
-
-  @Input()
-  set visible(value:true|false){
-    this._visible = value;
-  }
-
-  get visible():true|false{
-    return this._visible;
-  }
-
-  @Output() options: EventEmitter<IOptions[] | null> = new EventEmitter<IOptions[] | null>();
-
-  constructor(private renderer: Renderer2, private el: ElementRef) {}
 
   ngOnInit(): void {
     this.initializeEventListeners();
@@ -118,7 +113,7 @@ export class HighlightCustomComponent implements OnInit {
   }
 
   emitSelectors(): void {
-    this.options.emit([...this.wordStates]);
+    this.service.setOptions([...this.wordStates]);
   }
 
 
@@ -134,8 +129,7 @@ export class HighlightCustomComponent implements OnInit {
         this.wordStates[index].isSelected = !this.wordStates[index].isSelected;
         this.wordStates[index].isCorrect = this.wordStates[index].isSelected ? this.wordStates[index].isCorrect : false;
       } 
-
-    this.options.emit(this.wordStates);
+      this.emitSelectors();
   }
   getOriginalWords(mergedWord: string): IOptions[] {
     const words = mergedWord.split(/(\s+)/)
@@ -176,6 +170,6 @@ export class HighlightCustomComponent implements OnInit {
       w.isSelected = false;
       w.isCorrect = false;  
     });
-    this.options.emit(this.wordStates);
+    this.emitSelectors();
   }
 }
