@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { CoreService } from 'src/app/core.service';
 import { IOptions } from 'src/app/shared/interface';
 
 @Component({
@@ -13,6 +14,7 @@ export class HighlightSelectorComponent implements OnInit {
   private _visibile:true|false = false;
   private _concateWord: true | false = false;
   isChecked:true|false = false;
+  validateSelect:boolean = false;
 
   @Input()
   set selectors(value: IOptions[] | null) {
@@ -50,7 +52,11 @@ export class HighlightSelectorComponent implements OnInit {
 
   @Output() options: EventEmitter<IOptions[] | null> = new EventEmitter<IOptions[] | null>();
 
-  constructor() {}
+  constructor(private service:CoreService) {
+    service.validateSelect.subscribe((value)=>{
+      this.validateSelect = value;
+    });
+  }
 
   ngOnInit(): void {
     this.updateIsChecked();

@@ -8,18 +8,24 @@
   </div>
   
   <br>
-  <div class="selectors-text-section">
-    <ng-container *ngIf="visible; else noText">
-      <ng-container *ngFor="let item of selectors; let i = index">
-        <span *ngIf="item.word !== '\n'" 
-              class="selector-items" 
-              [class.selected]="item.isSelected"
-              (click)="toggleSelection(i)">{{ item.word }}</span>
-        <br *ngIf="item.word === '\n'">
+  <div class="selector-main-body">
+    <div class="selectors-text-section">
+      <ng-container *ngIf="visible; else noText">
+        <ng-container *ngFor="let item of selectors; let i = index">
+          <span *ngIf="item.word !== '\n'" 
+                class="selector-items" 
+                [class.selected]="item.isSelected"
+                (click)="toggleSelection(i)">{{ item.word }}</span>
+          <br *ngIf="item.word === '\n'">
+        </ng-container>
+      
       </ng-container>
+      <ng-template #noText>
+        <p class="no-text-section">No text phrase has been entered yet</p>
+      </ng-template>
+    </div>
+    <ng-container  *ngIf="validateSelect">
+      <div class="validateError">At least one selection is required.</div>
     </ng-container>
-    <ng-template #noText>
-      <p class="no-text-section">No text phrase has been entered yet</p>
-    </ng-template>
   </div>
 </form>

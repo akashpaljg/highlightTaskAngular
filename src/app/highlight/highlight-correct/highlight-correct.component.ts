@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { CoreService } from 'src/app/core.service';
 import { IOptions } from 'src/app/shared/interface';
 
 @Component({
@@ -11,6 +12,7 @@ export class HighlightCorrectComponent implements OnInit {
   private _visible:true|false = false;
   isChecked:true|false = false;
   isValueSelected:true|false = false;
+  isDisableSelect:boolean = true;
 
   @Input()
   set selectors(value: IOptions[] | null) {
@@ -39,7 +41,7 @@ export class HighlightCorrectComponent implements OnInit {
   @Output() options: EventEmitter<IOptions[] | null> = new EventEmitter<IOptions[] | null>();
 
 
-  constructor() {}
+  constructor(private service:CoreService) {}
 
   ngOnInit(): void {
     console.log("Recieved at correct");
@@ -57,6 +59,7 @@ export class HighlightCorrectComponent implements OnInit {
           item.isCorrect = !item.isCorrect;
         }
         this.updateIsChecked();
+        this.handleCorrectClick();
       this.options.emit(this._selectors);
     }
   }
@@ -98,8 +101,13 @@ export class HighlightCorrectComponent implements OnInit {
   
     // If no words are selected, isChecked should be false
     this.isChecked = selectedWords.length > 0 && selectedWords.every(w => w.isCorrect);
+    this.isDisableSelect =  selectedWords.length > 0;
   
     console.log(`Is Checked: ${this.isChecked}`);
+  }
+
+  handleCorrectClick():void{
+    this.service.setValidateSelect(!this.isDisableSelect);
   }
   
   
