@@ -1,0 +1,15 @@
+<div class="highlight-save-preview-section">
+    <div class="highlight-save-preview-heading">
+        Highlight <span class="highlight-save-preview-heading-metadata">(Locked)</span>
+    </div>
+    <div class="highlight-save-preview-buttons">
+        <button>
+            <i class="fa-solid fa-unlock highlight-save-preview-buttons-icon"></i>
+            Unlcok
+        </button>
+        <button [disabled]="!isPreview" (click)="navigateToPreview()" [class.cursor-pointer]="isPreview">
+            <i class="fa-solid fa-eye highlight-save-preview-buttons-icon" [class.disable]="!isPreview"></i>
+            Save and Preview
+        </button>
+    </div>
+</div>

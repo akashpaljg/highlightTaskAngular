@@ -1,0 +1,51 @@
+/* Highlight save and preview */
+.highlight-save-preview-section{
+    width: 75%;
+    margin: 1.5rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "QuickSand_Medium",'Courier New', Courier, monospace;
+    font-weight: 600;
+    
+}
+.highlight-save-preview-heading{
+    font-size: 1.5rem;
+    flex:auto;
+    display: flex;
+    align-items: center;
+}
+.highlight-save-preview-buttons{
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.highlight-save-preview-buttons > button{
+    display: flex;
+    align-items: center;
+    padding: 0.2rem 1rem;
+    background: #E2F8FE 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 1px solid #7994B3;
+    font-size: 1rem;
+    font-family: "QuickSand_Medium",'Courier New', Courier, monospace;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.highlight-save-preview-buttons-icon{
+    margin-right: 0.5rem;
+    color: black;
+    font-size: 1rem;
+}
+.highlight-save-preview-heading-metadata{
+    font-size: 0.95rem;
+    color: #666666;
+    margin-left: 0.5rem;
+}
+.disable{
+    opacity: 0.4;
+}

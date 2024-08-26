@@ -32,6 +32,7 @@ export class HighlightComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.service.setisPreview(false);
   }
 
   navigateToPreview(){
@@ -180,7 +181,7 @@ export class HighlightComponent implements OnInit {
       this.completeQuestion.options = this.options?this.options:[];
       this.isVisible = true;  
     } else {
-      this.isPreview = false;
+      this.service.setisPreview(false);
       this.isVisible = false;
     }
 
@@ -193,7 +194,7 @@ export class HighlightComponent implements OnInit {
     this.options = options;
     this.completeQuestion.options = options ? options : [];
     this.getCorrectAnswer(options);
-    this.isPreview = this.checkPreview(this.completeQuestion);
+    this.service.setisPreview(this.checkPreview(this.completeQuestion));
     
     this.service.setcompleteQuestion(this.completeQuestion);
     console.log("Service got the data");
