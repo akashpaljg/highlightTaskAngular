@@ -11,6 +11,8 @@ export class PreviewQuestionsComponent implements OnInit {
   completeQuestion: IQuestion | null = null;
   items:{isHover:boolean,item?:IOptions}[] = [];
   isChecking:true|false = false;
+  isCheckingEnabled:boolean = false;
+  showCorrectAnswer:boolean = false;
 
   bgColor:boolean[] = [];
 
@@ -19,6 +21,7 @@ export class PreviewQuestionsComponent implements OnInit {
   ngOnInit(): void {
     this.completeQuestion = this.service.getCompleteQuestion();
     this.initializeOptions();
+    this.checkingEnabled();
     console.log(this.completeQuestion?.options);
   }
 
@@ -47,6 +50,21 @@ export class PreviewQuestionsComponent implements OnInit {
     }else{
       this.items[i].item = item;
     }
+    this.checkingEnabled();
+  }
+
+  checkingEnabled(){
+    let check = false;
+    this.items.map((item)=>{
+      if(item.item){
+        check = true;
+      }
+    })
+    this.isCheckingEnabled = check;
+  }
+
+  handleShowCorrectAnswer(){
+    this.showCorrectAnswer = !this.showCorrectAnswer;
   }
 
     
@@ -54,17 +72,11 @@ export class PreviewQuestionsComponent implements OnInit {
       this.isChecking = !this.isChecking;
       if(!this.isChecking){
         this.initializeOptions();
+        this.checkingEnabled();
+        this.showCorrectAnswer = false;
       }
       
     }
 
-    getItemClasses(item: any, isChecking: boolean): any {
-      return {
-        'highlight': (!isChecking && item.isHover) || item.item,
-        'green': item.item && isChecking && item.item?.isCorrect,
-        'red': item.item && isChecking && !item.item?.isCorrect
-      };
-    }
-    
     
 }

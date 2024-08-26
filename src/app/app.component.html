@@ -1,23 +1,20 @@
-<nav class="nav--section">
+<section class="nav--section">
   <div>
       <img src="assets/icons/logo used in header.svg" alt="Logo">
   </div>
   <div class="navigate--links">
-      <a href="#">Content</a>
-      <a href="#">Users</a>
-      <a href="#">Manage Site</a>
-      <!-- <a href="#">
-          <img src="assets/icons/alerts.svg" alt="">
-      </a> -->
-      <a href="#">
-          <img src="assets/icons/alerts.svg" alt="Alerts">
-      </a>
-      <a href="#">
-          <img src="assets/icons/announcements.svg" alt="Announcements">
-      </a>
-      <a href="#">
-          <img src="assets/icons/account_circle.svg" alt="">
-      </a>
+    <ul>
+        <ng-container *ngFor="let item of navLinks;let i=index">
+            <ng-container *ngIf="item.title">
+                <li><a href="" [class.active]="item.isActive" (click)="handleActive(i)">{{item.title}}</a></li>
+            </ng-container>
+            <ng-container *ngIf="item.imageUrl">
+                <li><a href="" [class.imageActive]="item.isActive" (click)="handleActive(i)">
+                    <img src="{{item.imageUrl}}" alt="{{item.url}}">
+                </a></li>
+            </ng-container>
+        </ng-container>
+    </ul>
   </div>
-</nav>
+</section>
 <router-outlet></router-outlet>

@@ -83,13 +83,18 @@
     cursor: pointer;
     user-select: none; 
     cursor: default;
+    display: inline;
+    white-space: normal;
+    word-break: break-all;
+    margin-right: 0.25rem;
   }
+
   
   .selected {
     background-color: #FFF784;
     border: none;
     /* color: white; */
-    margin: 0 2px;
+    /* margin: 0 2px; */
   }
 
   .cursor {

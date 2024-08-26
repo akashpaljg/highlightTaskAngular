@@ -14,9 +14,7 @@
             [class.cursor]="item.isSelected"
             [class.selected]="item.isCorrect"
             [class.disabled]="!item.isCorrect"
-            (click)="toggleSelection(i)">
-        {{ item.word }}
-        </span>
+            (click)="toggleSelection(i)">{{ item.word }}</span>
         <!-- Handle line breaks or paragraph separations -->
         <br *ngIf="item.word === '\n'">
     </ng-container>
