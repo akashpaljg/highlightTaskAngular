@@ -15,7 +15,7 @@ export class PreviewHeaderComponent implements OnInit {
   }
 
   onExitPreview(){
-    this.router.navigate(['./highlight'])
+    this.router.navigate(['/highlight/questionContent'])
   }
 
     

@@ -1,3 +1,210 @@
-<h1>
-    Question Properties
-</h1>
+<div class="question-properties">
+    <div class="section">
+        <div class="section-header" (click)="handleVisibility()">
+            <div>
+                <p class="heading">Properties</p>
+            </div>
+            <div class="section-body-svg">
+                <ng-container *ngIf="!showProperty; else properties">
+                    <svg class="section-header-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
+                </ng-container>
+                <ng-template #properties>
+                    <svg class="section-header-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"/></svg>
+                </ng-template>
+                
+            </div>
+        </div>
+        <ng-container *ngIf="showProperty">
+            <div class="bottomHead">
+                <div>
+                    <div>
+                        <p class="bottomHead-indicator" for="">*Fields are required</p>
+                    </div>
+                    <div class="labelDiv">
+                        <label class="indicator" for="">Question Description*</label>
+                    </div>
+                    <textarea name="QuesionDescription" id="questionDescription"></textarea>
+                </div>
+                <div>
+                    <div class="labelDiv">
+                        <label class="indicator" for="">Subject*</label>
+                    </div>
+                    <div class="topDivSelect">
+                        <select name="subject" id="select">
+                            <option value="Algebra">Algebra</option>
+                            <option value="Biology">Biology</option>
+                            <option value="ELA">ELA</option>
+                            <option value="Geometry">Geometry</option>
+                            <option value="Math">Math</option>
+                            <option value="Science">Science</option>
+                        </select>
+                        <select name="subject" id="select">
+                            <option value="Algebra">Algebra</option>
+                            <option value="Biology">Biology</option>
+                            <option value="ELA">ELA</option>
+                            <option value="Geometry">Geometry</option>
+                            <option value="Math">Math</option>
+                            <option value="Science">Science</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="labelDiv">
+                        <label class="indicator" for="">Language*</label>
+                    </div>
+                    <div class="topDivSelect">
+                        <select name="subject" id="select">
+                            <option value="English">English</option>
+                            <option value="German">German</option>
+                            <option value="Spanish">Spanish</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="labelDiv">
+                        <label class="indicator" for="">Grades*</label>
+                    </div>
+                    <button class="singleBtn">
+                        <h6>SELECT GRADES</h6>
+                    </button>
+                </div>
+                <div>
+                    <div class="labelDiv">
+                        <label class="indicator" for="">Difficulty Level*</label>
+                    </div>
+                    <div class="topDivSelect">
+                        <select name="subject" id="select">
+                            <option value="allLevel">All Level</option>
+                            <option value="belowGradeLevel">Below Grade Level</option>
+                            <option value="approachingGradeLevel">Approaching Grade Level</option>
+                            <option value="onGradeLevel">On Grade Level</option>
+                            <option value="aboveGradeLevel">Above Grade Level</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="topDivSelect">
+                        <select name="subject" id="select" class="diffSelect2">
+                            <option value="revisedBloomstaxonomy">Revised Bloom's Taxonomy</option>
+                            <option value="remembering">Remembering</option>
+                            <option value="understanding">Understanding</option>
+                            <option value="applying">Applying</option>
+                            <option value="ananlyzing">Ananlyzing</option>
+                            <option value="evaluating">Evaluating</option>
+                            <option value="creating">Creating</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="labelDiv">
+                        <label class="indicator" for="">Standards for Mathematical Practice*</label>
+                    </div>
+                    <button class="singleBtn">
+                        <h6>SELECT STANDARDS FOR MATHEMATICAL PRACTICE</h6>
+                    </button>
+                </div>
+                <div>
+                    <div class="labelDiv">
+                        <label class="indicator" for="">Depth of Knowledge*</label>
+                    </div>
+                    <button class="singleBtn">
+                        <h6>SELECT DEPTH OF KNOWLEDGE</h6>
+                    </button>
+                </div>
+                <div>
+                    <div class="labelDiv">
+                        <label class="indicator" for="">Depth of Knowledge*</label>
+                    </div>
+                    <button class="singleBtn">
+                        <h6>SELECT DEPTH OF KNOWLEDGE</h6>
+                    </button>
+                </div>
+                <div>
+                    <div class="labelDiv">
+                        <label class="indicator" for="">Keywords*</label>
+                    </div>
+                    <button class="singleBtn">
+                        <h6>ADD KEYWORDS</h6>
+                    </button>
+                </div>
+                <div>
+                    <div class="labelDiv">
+                        <label class="indicator" for="">Page Associations*</label>
+                    </div>
+                    <button class="singleBtn">
+                        <h6>SELECT ASSOCIATIONS</h6>
+                    </button>
+                </div>
+                <div>
+                    <div class="labelDiv">
+                        <label class="indicator" for="">Object Id</label>
+                    </div>
+                    <button class="singleBtn">
+                        <h6>00155945</h6>
+                    </button>
+                </div>
+                <div>
+                    <div class="labelDiv">
+                        <label class="indicator" for="">Competencies*</label>
+                    </div>
+                    <button class="singleBtn">
+                        <h6>SELECT COMPETENCIES</h6>
+                    </button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div class="section1">
+        <div class="section-header" (click)="handleStandardSet()">
+            <div>
+                <p class="heading">Select the Standard Set</p>
+            </div>
+            <div class="section-body-svg">
+                <ng-container *ngIf="!showStandardSet; else properties">
+                    <svg class="section-header-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
+                </ng-container>
+                <ng-template #properties>
+                    <svg class="section-header-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"/></svg>
+                </ng-template>
+                
+            </div>
+        </div>
+
+        <ng-container *ngIf="showStandardSet">
+            <div class="bottomHead">
+                <div>
+                    <h5 style="color: #1F7A54;">Select the Standard Set</h5>
+                    <div class="labelDiv">
+                        <label class="indicator" for="">Subject*</label>
+                    </div>
+                    <div class="topDivSelect1">
+                        <select name="subject" id="select1">
+                            <option value="standardSelect" disabled selected hidden>Standard Select*</option>
+                            <option value="ccstandardSelect">Common Core Standard Select</option>
+                            <option value="ngss">Next Generation Science Standard</option>
+                        </select>
+                        <select name="subject" id="select1">
+                            <option value="standardSelect" disabled selected hidden>Subject*</option>
+                            <option value="Algebra">Algebra</option>
+                            <option value="Biology">Biology</option>
+                            <option value="ELA">ELA</option>
+                            <option value="Geometry">Geometry</option>
+                            <option value="Math">Math</option>
+                            <option value="Science">Science</option>
+                        </select>
+                        <select name="subject" id="select1">
+                            <option value="standardSelect" disabled selected hidden>Grade*</option>
+                            <option value="grade1">Grade 1</option>
+                            <option value="grade2">Grade 2</option>
+                            <option value="grade3">Grade 3</option>
+                            <option value="grade4">Grade 4</option>
+                            <option value="grade5">Grade 5</option>
+                            <option value="grade6">Grade 6</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <button class="subBtn" routerLink="['/questionContent']">Save and Proceed</button>
+</div>

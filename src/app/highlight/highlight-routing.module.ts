@@ -7,6 +7,7 @@ import { HighlightQuestionPropertiesComponent } from './highlight-question-prope
 
 const routes: Routes = [
   {path:"highlight",component:HighlightComponent,children:[
+   
     {
       path:"questionContent",component:HighlightQuestionContentComponent,
     },

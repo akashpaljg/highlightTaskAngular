@@ -1,0 +1,167 @@
+.question-properties{
+    width: 73%;
+    margin: 1.5rem auto 0.5rem;
+    border: none;
+    border-radius: 2px;
+}
+.section{
+    justify-content: space-between;
+    background-color: #ffffff;
+    font-size: 16px;
+}
+/* Section Header */
+.section-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    border-bottom: 1px solid lightgray;
+    cursor: pointer;
+}
+.section-body-svg{
+    padding: 0.1rem 0;
+    border: none;
+    border-left: 1px solid lightgray;
+}
+.section-header-svg{
+    width: 1rem;
+    padding: 1.1rem 0.5rem;
+    /* height: 100%; */
+}
+
+/* Properties full section */
+.bottomHead-indicator{
+    text-align: right;
+    font-size: 12px;
+    line-height: 16px;
+    color: #666;
+}
+
+
+.btn{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    color: #2B5642;
+    background-color: #3FD28B;
+    padding: 2px;
+    margin-right: 5px ;
+}
+
+.topBanner:hover{
+    cursor: pointer;
+}
+
+.banner{
+    height: inherit;
+    padding: 10px;
+}
+
+.banner:hover{
+    background-color: #F5F5F5;
+}
+
+.topHr{
+    width: 450px;
+    margin: auto;
+}
+
+
+
+.section1{
+    margin-top: 20px;
+    margin-bottom: 3rem;
+    justify-content: space-between;
+    background-color: #ffffff;
+    font-size: 16px;
+}
+.heading{
+    margin: 0px;
+    padding: 20px;
+    color: #222;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+hr{
+    width: 900px;
+    margin: auto;
+    padding: 0;
+}
+.labelDiv{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.bottomHead{
+    
+    padding: 2rem 1.25rem;
+}
+
+.indicator{
+    color: #666666;
+    opacity: 1;
+    font-size: 14px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#questionDescription{
+    border: none;
+    border-bottom: 2px solid rgb(198, 198, 198);
+    opacity: 1;
+    width: 60%;
+    outline: none;
+}
+
+#select{
+    width: 45%;
+    height: 50px;
+    border: none;
+    border-bottom: 2px solid rgb(198, 198, 198);
+    opacity: 1;
+    outline: none;
+}
+#select1{
+    width: 30%;
+    height: 50px;
+    border: none;
+    border-bottom: 2px solid rgb(198, 198, 198);
+    opacity: 1;
+    outline: none;
+}
+
+.topDivSelect{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.topDivSelect1{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.singleBtn{
+    background-color: inherit;
+    color: #1F7A54;
+    border: none;
+    outline: none;
+}
+
+.diffSelect2{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.subBtn{
+    background-color: #1F7A54;
+    color: white;
+    padding: 5px;
+    margin: 30px auto 60px 45%;
+}
