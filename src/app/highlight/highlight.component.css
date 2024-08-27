@@ -1,7 +1,9 @@
 .highlight-body{
     background-color: #eeeeee;
     padding: 0 0 2rem 0;
+    height: 100%;
 }
+
 /* Highlight save and preview */
 .highlight-save-preview-section{
     width: 75%;
