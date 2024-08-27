@@ -36,6 +36,7 @@
     font-size: 12px;
     line-height: 16px;
     color: #666;
+    margin: 0;
 }
 
 
@@ -94,7 +95,7 @@ hr{
     display: flex;
     justify-content: space-between;
     margin-top: 5px;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
 }
 
 .bottomHead{
@@ -106,7 +107,7 @@ hr{
     color: #666666;
     opacity: 1;
     font-size: 14px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     margin-top: 20px;
 }
 
@@ -118,17 +119,29 @@ hr{
     outline: none;
 }
 
-#select{
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     width: 45%;
-    height: 50px;
+    height: 1.5rem;
     border: none;
     border-bottom: 2px solid rgb(198, 198, 198);
     opacity: 1;
     outline: none;
+    margin: 0;
+    padding: 0;
+    
+    background-color: transparent; /* Ensure no background styling interferes */
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 100%;
+    background-position-y: 0px;
 }
+
 #select1{
     width: 30%;
-    height: 50px;
+    height: 1.5rem;
     border: none;
     border-bottom: 2px solid rgb(198, 198, 198);
     opacity: 1;
@@ -164,4 +177,9 @@ hr{
     color: white;
     padding: 5px;
     margin: 30px auto 60px 45%;
+}
+
+/* Generalized css classes */
+.margin-top-1{
+    margin-top: 1.5rem;
 }
