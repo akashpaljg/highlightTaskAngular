@@ -76,7 +76,7 @@
     margin-bottom: 3rem;
     justify-content: space-between;
     background-color: #ffffff;
-    font-size: 16px;
+    font-size: 1rem;
 }
 .heading{
     margin: 0px;
@@ -120,6 +120,14 @@ hr{
     outline: none;
 }
 
+#select1{
+    width: 20%;
+    border: none;
+    border-bottom: 2px solid rgb(198, 198, 198);
+    opacity: 1;
+    outline: none;
+}
+
 select {
     appearance: none;
     -webkit-appearance: none;
@@ -146,14 +154,7 @@ select {
     text-overflow: ellipsis;
 }
 
-#select1{
-    width: 30%;
-    height: 1.5rem;
-    border: none;
-    border-bottom: 2px solid rgb(198, 198, 198);
-    opacity: 1;
-    outline: none;
-}
+
 
 .topDivSelect{
     width: 60%;
