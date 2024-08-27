@@ -116,9 +116,14 @@ hr{
     border: none;
     border-bottom: 2px solid rgb(198, 198, 198);
     opacity: 1;
-    width: 60%;
+    width: 40%;
     outline: none;
+    resize: vertical;
 }
+#questionDescription:focus{
+    border-bottom: 2px solid #1b62f1;
+}
+
 
 #select1{
     width: 20%;
@@ -202,3 +207,49 @@ h6 {
     margin-top: 12px;
     font-size: 14px;
 }
+
+/* Textarea animation */
+.input-group {
+    position: relative;
+  }
+  
+  .input-group .form-input {
+    display: block;
+    background: none;
+    background-color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0px;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+    margin: 25px 0;
+  }
+  
+
+
+  .input-group .form-input:not([value=""]) ~ .form-input-label,
+  .input-group .form-input:focus ~ .form-input-label {
+    top: -1.5rem;
+    font-size: 12px;
+  }
+
+  .input-group .form-input:focus ~ .form-input-label {
+    color: #1b62f1;
+    
+  }
+  
+  .input-group .form-input-label {
+    color: #666666;
+    font-size: 1rem;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    top: -0.5rem;
+    -webkit-transition: 300ms ease all;
+    transition: 300ms ease all;
+    
+  }
+  
+  

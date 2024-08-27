@@ -20,10 +20,13 @@
                     <div>
                         <p class="bottomHead-indicator" for="">*Fields are required</p>
                     </div>
-                    <div class="labelDiv">
-                        <label class="indicator" for="">Question Description*</label>
-                    </div>
-                    <textarea name="QuesionDescription" id="questionDescription"></textarea>
+                    
+                    <div class="input-group">
+                        
+                        <textarea name="QuesionDescription" id="questionDescription" class="form-input"  onkeyup="this.setAttribute('value', this.value);" value=""></textarea>
+                        <label for="username" class="indicator form-input-label">Question Description*</label>
+                        
+                      </div>
                 </div>
                 <div class="bottomHead-subjects margin-top-1">
                     <div class="labelDiv">
