@@ -1,6 +1,7 @@
 .highlight-body{
     background-color: #eeeeee;
     padding: 0 0 2rem 0;
+    min-height: calc(100vh - 120px);
     height: 100%;
     margin: 0;
 }
