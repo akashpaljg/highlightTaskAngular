@@ -7,7 +7,7 @@
                         <label class="label-style">* Fields are required</label>
                     </div>
                     <textarea type="text" name="question" placeholder="Enter Question (Stem)" (blur)="updateVisibility()" (change)="updateVisibility()" id="question" (input)="autoResize($event)"
-                    (keydown)="onEnter($event)" [(ngModel)]="question" rows="1"></textarea>
+                    (keydown)="onEnter($event)" [(ngModel)]="question" rows="1" [value]="completeQuestion.question"></textarea>
                 </div>
                 
                 <div class="text-phrase-section mb-3">

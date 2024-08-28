@@ -30,9 +30,11 @@ export class HighlightQuestionContentComponent implements OnInit {
     }
   
     ngOnInit(): void {
-      this.service.getOptions().subscribe((value)=>{
-        this.options = value;
-      });
+        this.service.getOptions().subscribe((value)=>{
+          this.options = value;
+        });
+      
+      
       this.service.getTotalCorrectAnswer().subscribe((value:number[])=>{
         this.totalCorrectAnswers = value;
       });
@@ -186,12 +188,14 @@ export class HighlightQuestionContentComponent implements OnInit {
         this.completeQuestion.question = this.question;
         this.completeQuestion.textPhrase = this.textPhrase;
         this.completeQuestion.options = this.options?this.options:[];
+
         this.service.setCompleteQuestion(this.completeQuestion);
         this.service.setVisibility(true);
       } else {
         this.service.setIsPreview(false);
         this.service.setVisibility(false);
       }
+      
   
       
     
