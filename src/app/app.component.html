@@ -1,25 +1,34 @@
 <div class="main-content">
-<section class="nav--section">
-  <div>
-      <img src="assets/icons/logo used in header.svg" alt="Logo">
-  </div>
-  <div class="navigate--links">
-    <ul>
-        <ng-container *ngFor="let item of navLinks;let i=index">
+    <section class="nav--section">
+      <div>
+        <img src="assets/icons/logo used in header.svg" alt="Logo">
+      </div>
+      <div class="navigate--links">
+        <ul>
+          <ng-container *ngFor="let item of navLinks; let i = index">
             <ng-container *ngIf="item.title">
-                <li><a href="" [class.active]="item.isActive" (click)="handleActive(i)">{{item.title}}</a></li>
+              <li>
+                <a href="" [class.active]="item.isActive" (click)="handleActive(i)">
+                  {{item.title}}
+                </a>
+              </li>
             </ng-container>
             <ng-container *ngIf="item.imageUrl">
-                <li><a href="" [class.imageActive]="item.isActive" (click)="handleActive(i)">
-                    <img src="{{item.imageUrl}}" alt="{{item.url}}">
-                </a></li>
+              <li>
+                <a href="" [class.imageActive]="item.isActive" (click)="handleActive(i)">
+                  <img src="{{item.imageUrl}}" alt="{{item.url}}">
+                </a>
+              </li>
             </ng-container>
-        </ng-container>
-    </ul>
+          </ng-container>
+        </ul>
+      </div>
+    </section>
+  
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  
+    <app-footer></app-footer>
   </div>
-</section>
-
-<router-outlet></router-outlet>
-
-<app-footer></app-footer>
-</div>
+  

@@ -5,7 +5,6 @@ body{
     width: 100vw;
     height: 100vh;
     position: relative;
-    background-color: #eeeeee;
 }
 @font-face {
     font-family:"QuickSand_Medium";

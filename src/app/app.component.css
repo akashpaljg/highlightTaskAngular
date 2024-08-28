@@ -57,10 +57,18 @@
 .main-content {
     display: flex;
     flex-direction: column;
+    
+    min-height: calc(100vh - 110px);
     height: 100%;
+    overflow-x: hidden;
   }
 
   app-footer {
     margin-top: auto;
+    min-height: 3.5rem;
   }
-
+  
+  .content-wrapper {
+    height: 100%;
+  }
+  
