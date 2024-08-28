@@ -273,3 +273,29 @@ h6 {
     color: #666;
     font-size: 0.75rem;
   }
+
+  /* Second one changing  */
+
+  .second-bottomHead{
+    padding: 1.5rem;
+  }
+  .second-bottomHead-heading{
+    margin: 0 0 1.5rem;
+  }
+  .second-bottomHead-topDivSelect{
+    padding-bottom: 2rem;
+  }
+  .second-bottomHead-button{
+    text-align: center;
+  }
+  .second-bottomHead-button > button{
+    font-size: 14px;
+    padding: 0.3rem 1rem;
+    box-shadow: 0 3px 4.7px .3px #0000003d;
+    background-color: #bad1ff;
+    color: #222;
+    border: 1px solid #3142DD;
+    opacity: .4;
+    text-transform: uppercase;
+    font-family: "QuickSand_Medium",'Courier New', Courier, monospace;
+  }
