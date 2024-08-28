@@ -169,4 +169,5 @@ textarea::placeholder{
     font-size: 1rem;
     font-family: "QuickSand_Medium",'Courier New', Courier, monospace;
     font-weight: 600;
+    cursor: pointer;
 }

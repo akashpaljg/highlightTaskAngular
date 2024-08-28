@@ -20,18 +20,19 @@ export class HighlightCorrectComponent implements OnInit {
 
 
   constructor(private service:CoreService) {
-    service.getOptions().subscribe((value)=>{
+   
+  }
+
+  ngOnInit(): void {
+    this.service.getOptions().subscribe((value)=>{
       if(!value){return;}
       this._selectors = value.map(item => ({ ...item }));
       this.isValueSelected = true;
       this.updateIsChecked();
     })
-    service.getVisibility().subscribe((value)=>{
+    this.service.getVisibility().subscribe((value)=>{
       this.visible = value;
     })
-  }
-
-  ngOnInit(): void {
     console.log("Recieved at correct");
     console.log(this._selectors);
     this.updateIsChecked();

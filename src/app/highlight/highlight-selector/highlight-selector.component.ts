@@ -22,24 +22,25 @@ export class HighlightSelectorComponent implements OnInit {
 
 
   constructor(private service:CoreService) {
-    service.validateSelect.subscribe((value)=>{
+    
+  }
+
+  ngOnInit(): void {
+    this.service.validateSelect.subscribe((value)=>{
       this.validateSelect = value;
     });
-    service.getOptions().subscribe((value)=>{
+    this.service.getOptions().subscribe((value)=>{
       this._originalSelectors = value.map(item => ({ ...item }));
       this._currentSelectors = value.map(item => ({ ...item }));
       console.log('Options received:', this._currentSelectors);
       this.updateIsChecked();
     })
-    service.getVisibility().subscribe((value)=>{
+    this.service.getVisibility().subscribe((value)=>{
       this.visible = value;
     })
-    service.getConcateWords().subscribe((value)=>{
+    this.service.getConcateWords().subscribe((value)=>{
       this._concateWord = value;
     })
-  }
-
-  ngOnInit(): void {
     this.updateIsChecked();
   }
 

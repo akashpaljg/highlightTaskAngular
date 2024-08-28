@@ -1,6 +1,7 @@
 .highlight-body{
     background-color: #eeeeee;
     padding: 0 0 2rem 0;
+    /* To add default scroll bar to the highlight page */
     min-height: calc(100vh - 170px);
     height: 100%;
     margin: 0;

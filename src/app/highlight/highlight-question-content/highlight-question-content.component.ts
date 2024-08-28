@@ -26,18 +26,19 @@ export class HighlightQuestionContentComponent implements OnInit {
     };
   
     constructor(private router:Router,private service:CoreService) {
-      service.getOptions().subscribe((value)=>{
-        this.options = value;
-      });
-      service.getTotalCorrectAnswer().subscribe((value:number[])=>{
-        this.totalCorrectAnswers = value;
-      });
-      service.getVisibility().subscribe((value)=>{
-        this.isVisible = value;
-      })
+      
     }
   
     ngOnInit(): void {
+      this.service.getOptions().subscribe((value)=>{
+        this.options = value;
+      });
+      this.service.getTotalCorrectAnswer().subscribe((value:number[])=>{
+        this.totalCorrectAnswers = value;
+      });
+      this.service.getVisibility().subscribe((value)=>{
+        this.isVisible = value;
+      })
       this.service.setIsPreview(false);
     }
   
@@ -208,6 +209,10 @@ export class HighlightQuestionContentComponent implements OnInit {
       if (event.key === 'Enter') {
         this.autoResize(event);
       }
+    }
+
+    naviagteToQuestionProperties():void{
+      this.router.navigate(['highlight/questionProperties']);
     }
 
 }

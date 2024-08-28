@@ -17,11 +17,16 @@ export class HighlightCustomComponent implements OnInit {
   
 
   constructor(private renderer: Renderer2, private el: ElementRef,private service:CoreService) {
-    service.getVisibility().subscribe((value)=>{
+   
+  }
+
+  ngOnInit(): void {
+    this.initializeEventListeners();
+    this.service.getVisibility().subscribe((value)=>{
       this.visible = value;
     })
 
-    service.getOptions().subscribe((value)=>{
+    this.service.getOptions().subscribe((value)=>{
       console.log("Received at Highlight custom component");
       console.log(value);
       
@@ -29,13 +34,9 @@ export class HighlightCustomComponent implements OnInit {
       this._originalSelectors = value ? value.map(item => ({ ...item })) : [];
     })
 
-    service.getValidateSelect().subscribe((value)=>{
+    this.service.getValidateSelect().subscribe((value)=>{
       this.validateSelect = value;
     })
-  }
-
-  ngOnInit(): void {
-    this.initializeEventListeners();
   }
 
   initializeEventListeners(): void {
@@ -164,12 +165,16 @@ export class HighlightCustomComponent implements OnInit {
       alert("No value is selected");
       return;
     }
-    this.wordStates
-    .filter(w => w.word.trim() !== '')
-    .map(w=>{
-      w.isSelected = false;
-      w.isCorrect = false;  
+
+    this.wordStates.map((word,index)=>{
+      if(word.isSelected){
+        const originalWords = this.getOriginalWords(word.word);
+        this.wordStates.splice(index, 1, ...originalWords);
+      }
     });
+
+    // this.updateSelectors();
     this.emitSelectors();
+    
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'highlight-question-properties',
@@ -6,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./highlight-question-properties.component.css']
 })
 export class HighlightQuestionPropertiesComponent implements OnInit {
-  showProperty:boolean = false;
+  showProperty:boolean = true;
   showStandardSet:boolean = false;
-  constructor(){}
+  constructor(private router:Router){}
 
   ngOnInit(): void {
     
@@ -26,6 +27,10 @@ export class HighlightQuestionPropertiesComponent implements OnInit {
    */
   handleStandardSet():void{
     this.showStandardSet = !this.showStandardSet;
+  }
+
+  navigateToQuestionContent(){
+    this.router.navigate(['highlight/questionContent']);
   }
 
 }
