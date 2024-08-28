@@ -157,6 +157,7 @@ select {
     padding: 7px 0px;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin: 0rem 2rem 0rem 0rem;
 }
 
 
@@ -164,7 +165,7 @@ select {
 .topDivSelect{
     width: 60%;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .topDivSelect1{
