@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { CoreService } from 'src/app/core.service';
 import { IOptions, IQuestion } from 'src/app/shared/interface';
@@ -8,7 +8,7 @@ import { IOptions, IQuestion } from 'src/app/shared/interface';
   templateUrl: './highlight-question-content.component.html',
   styleUrls: ['./highlight-question-content.component.css']
 })
-export class HighlightQuestionContentComponent implements OnInit {
+export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit {
 
     question: string = "";
     textPhrase: string = "";
@@ -25,11 +25,19 @@ export class HighlightQuestionContentComponent implements OnInit {
       answersCount:0
     };
   
-    constructor(private router:Router,private service:CoreService) {
+    constructor(private router:Router,private service:CoreService,private el:ElementRef,private renderer:Renderer2) {
       
     }
   
     ngOnInit(): void {
+
+      this.service.getCompleteQuestion().subscribe((value)=>{
+        if(!value){return;}
+        this.question = value.question;
+        this.textPhrase = value.textPhrase;
+        this.adjustTextareaHeight();
+      })
+
         this.service.getOptions().subscribe((value)=>{
           this.options = value;
         });
@@ -43,6 +51,28 @@ export class HighlightQuestionContentComponent implements OnInit {
       })
       this.service.setIsPreview(false);
     }
+
+    ngAfterViewInit(): void {
+      this.adjustTextareaHeight();
+
+    }
+
+    private adjustTextareaHeight(): void {
+      setTimeout(() => {
+        const textarea = this.el.nativeElement.querySelector('.textPhrase');
+        if (textarea) { 
+          console.log('Adjusting textarea height');
+          console.log(`Textare scroll height: ${textarea.scrollHeight}`)
+          this.renderer.setStyle(textarea, 'height', 'auto');
+          this.renderer.setStyle(textarea, 'height', `${textarea.scrollHeight}px`);
+        } else {
+          console.log('Textarea not ready, retrying...');
+          setTimeout(() => this.adjustTextareaHeight(), 500);
+        }
+      }, 0);
+    }
+
+    
   
     navigateToPreview(){
       console.log("Clicked on Preview");
@@ -168,17 +198,6 @@ export class HighlightQuestionContentComponent implements OnInit {
       return result;
     }
   
-    getCustomOptions(textPhrase: string): IOptions[] | null {
-      // const customOptions: IOptions[] = [];
-      this.customType = true;
-      // alert(this.customType);
-      return [{
-        word:textPhrase,
-        isSelected:false,
-        isCorrect:false
-      }];
-    }
-  
     updateVisibility(): void {
       if (this.question !== "" && this.textPhrase !== "" && this.answerType !== "") {
         this.options = this.getSelector(this.textPhrase, this.answerType);
@@ -192,21 +211,20 @@ export class HighlightQuestionContentComponent implements OnInit {
         this.service.setCompleteQuestion(this.completeQuestion);
         this.service.setVisibility(true);
       } else {
+        this.completeQuestion.question = this.question;
+        this.completeQuestion.textPhrase = this.textPhrase;
+        this.service.setCompleteQuestion(this.completeQuestion);
         this.service.setIsPreview(false);
         this.service.setVisibility(false);
       }
-      
   
-      
-    
+
       console.log(`${this.question} ${this.textPhrase} ${this.answerType}`)
     }
   
   
     autoResize(event: Event): void {
-      const textarea = event.target as HTMLTextAreaElement;
-      textarea.style.height = 'auto'; 
-      textarea.style.height = textarea.scrollHeight + 'px';
+      this.adjustTextareaHeight();
     }
   
     onEnter(event: KeyboardEvent): void {

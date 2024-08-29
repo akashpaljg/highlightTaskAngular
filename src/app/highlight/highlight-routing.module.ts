@@ -7,7 +7,11 @@ import { HighlightQuestionPropertiesComponent } from './highlight-question-prope
 
 const routes: Routes = [
   {path:"highlight",component:HighlightComponent,children:[
-   
+    {
+      path: "", 
+      redirectTo: "questionProperties", 
+      pathMatch: "full"
+    },
     {
       path:"questionContent",component:HighlightQuestionContentComponent,
     },

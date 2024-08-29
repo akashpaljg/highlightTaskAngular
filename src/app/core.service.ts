@@ -10,17 +10,25 @@ export class CoreService {
   validateSelect: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isPreview: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   options: BehaviorSubject<IOptions[]> = new BehaviorSubject<IOptions[]>([]);
-  totalCorrectAnswers: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
+  totalCorrectAnswers: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([0]);
   isVisible:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   concateWord:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 
-  // Setting concate words
+
+  /**
+   * This will set the concate words
+   * @param value stating the word type, now it is unknownfor the word used fo =r security purpose
+   */
   setConcateWords(value:boolean){
     this.concateWord.next(value);
   }
 
+  /**
+   * This will get the concate words
+   * @returns the observable boolean
+   */
   getConcateWords():Observable<boolean>{
     return this.concateWord;
   }

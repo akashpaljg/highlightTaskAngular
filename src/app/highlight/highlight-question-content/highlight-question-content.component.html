@@ -7,12 +7,12 @@
                         <label class="label-style">* Fields are required</label>
                     </div>
                     <textarea type="text" name="question" placeholder="Enter Question (Stem)" (blur)="updateVisibility()" (change)="updateVisibility()" id="question" (input)="autoResize($event)"
-                    (keydown)="onEnter($event)" [(ngModel)]="question" rows="1" [value]="completeQuestion.question"></textarea>
+                    (keydown)="onEnter($event)" [(ngModel)]="question" rows="1" ></textarea>
                 </div>
                 
                 <div class="text-phrase-section mb-3">
                     <label for="textPhrase" class="label-style">Text Phrase*</label><br>
-                    <textarea type="text" name="textPhrase" placeholder="Enter Text Phrase" (blur)="updateVisibility()" (change)="updateVisibility()" id="textPhrase"  (input)="autoResize($event)"
+                    <textarea class="textPhrase" type="text" name="textPhrase" placeholder="Enter Text Phrase" (blur)="updateVisibility()" (change)="updateVisibility()" id="textPhrase"  (input)="autoResize($event)"
                     (keydown)="onEnter($event)" [(ngModel)]="textPhrase" rows="1"></textarea>
                 </div>
                 <div class="radio-button-section">

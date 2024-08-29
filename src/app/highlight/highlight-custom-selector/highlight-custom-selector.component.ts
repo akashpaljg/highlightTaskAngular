@@ -14,7 +14,6 @@ export class HighlightCustomComponent implements OnInit {
   isValueSelected:true|false = false;
   visible:boolean = false;
   validateSelect:boolean = false;
-  
 
   constructor(private renderer: Renderer2, private el: ElementRef,private service:CoreService) {
    
