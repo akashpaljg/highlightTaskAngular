@@ -12,7 +12,7 @@ export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit 
 
     question: string = "";
     textPhrase: string = "";
-    answerType: string = "word";
+    answerType: string = "";
     options: IOptions[] | null = null;
     isVisible: boolean = false;
     customType:true|false = false;
@@ -22,6 +22,7 @@ export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit 
     completeQuestion:IQuestion = {
       question : "",
       textPhrase: "",
+      answerType:"",
       options: [],
       answersCount:0
     };
@@ -37,6 +38,8 @@ export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit 
         console.log(`Data Loaded: ${value.question} ${value.textPhrase}`)
         this.question = value.question;
         this.textPhrase = value.textPhrase;
+        this.answerType = value.answerType;
+        this.customType = this.answerType === "custom" ? true:false;
         this.adjustTextareaHeight();
       })
 
@@ -205,12 +208,15 @@ export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit 
       this.completeQuestion.question = this.question;
       this.completeQuestion.textPhrase = this.textPhrase;
 
-      if (this.question !== "" && this.textPhrase !== "" && this.answerType !== "") {
+      if (this.question.trim().length > 0  && this.textPhrase.trim().length > 0 && this.answerType.trim().length > 0) {
         this.options = this.getSelector(this.textPhrase, this.answerType);
+        this.completeQuestion.answerType = this.answerType;
+
         // to update the correct answer count
         if(this.options) this.service.setOptions(this.options);
-        console.log(`Update Visibility: ${this.question} ${this.textPhrase}`);
        
+        console.log(`Update Visibility: ${this.question} ${this.textPhrase}`);
+        
         this.completeQuestion.options = this.options?this.options:[];
         this.service.setCompleteQuestion(this.completeQuestion);
 

@@ -35,6 +35,7 @@
 .selector-main-body{
   margin: 1.5rem 0;
   width: 100%;
+  user-select: text;
 }
 
 .selectors-text-section{
@@ -60,6 +61,7 @@
 .highlighted {
   background-color: rgba(238, 240, 231, 0.885);
   border: 1px solid #ccc;
+  cursor: pointer;
   /* margin: 0px 0.25rem; */
   /* margin-left: 0.; */
   }

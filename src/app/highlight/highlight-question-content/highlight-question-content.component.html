@@ -21,7 +21,7 @@
                            
 
                             <ng-container *ngFor="let item of answerTypeArray">
-                                <input type="radio" id="{{item}}" (change)="updateVisibility()" name="drone" value="{{item}}" [(ngModel)]="answerType"  />
+                                <input type="radio" id="{{item}}" (change)="updateVisibility()" name="drone" [value]="item" [(ngModel)]="answerType"  />
                                 <label class="radio-label" for="{{item}}">{{item | capitalize}}</label>
                             </ng-container>
                         </div>

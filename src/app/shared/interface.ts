@@ -7,6 +7,7 @@ export interface IOptions {
 export interface IQuestion {
   question:string;
   textPhrase:string;
+  answerType:string,
   options:IOptions[];
   answersCount:number;
 }

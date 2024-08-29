@@ -156,24 +156,34 @@ export class HighlightCustomComponent implements OnInit {
     this.isValueSelected = false;
   }
 
-  resetClick():void{
+  /**
+   * This will unselect all the selected values in custom section on clicking reset button
+   * @returns 
+   */
+  resetClick(): void {
     const selectedStates = this.wordStates
-    .filter(w => w.word.trim() !== '')
-    .filter(w=>w.isSelected);
-    if(selectedStates.length === 0){
-      alert("No value is selected");
-      return;
+        .filter(w => w.word.trim() !== '')
+        .filter(w => w.isSelected);
+
+    if (selectedStates.length === 0) {
+        alert("No value is selected");
+        return;
     }
 
-    this.wordStates.map((word,index)=>{
-      if(word.isSelected){
-        const originalWords = this.getOriginalWords(word.word);
-        this.wordStates.splice(index, 1, ...originalWords);
-      }
-    });
+    let updatedWordStates:any[] = [];
 
-    // this.updateSelectors();
+    this.wordStates.map((word, index) => {
+        if (word.isSelected) {
+            const originalWords = this.getOriginalWords(word.word);
+            updatedWordStates.push(...originalWords);
+        } else {
+            updatedWordStates.push(word) 
+        }
+    }) 
+
+    this.wordStates = updatedWordStates;
+
     this.emitSelectors();
-    
-  }
+}
+
 }
