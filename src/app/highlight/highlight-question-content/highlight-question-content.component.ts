@@ -207,10 +207,12 @@ export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit 
     updateVisibility(): void {
       this.completeQuestion.question = this.question;
       this.completeQuestion.textPhrase = this.textPhrase;
+      this.completeQuestion.answerType = this.answerType;
+
+      console.log(`${this.question} ${this.textPhrase}`)
 
       if (this.question.trim().length > 0  && this.textPhrase.trim().length > 0 && this.answerType.trim().length > 0) {
         this.options = this.getSelector(this.textPhrase, this.answerType);
-        this.completeQuestion.answerType = this.answerType;
 
         // to update the correct answer count
         if(this.options) this.service.setOptions(this.options);
