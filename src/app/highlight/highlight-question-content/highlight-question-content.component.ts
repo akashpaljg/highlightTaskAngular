@@ -12,11 +12,12 @@ export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit 
 
     question: string = "";
     textPhrase: string = "";
-    answerType: string = "";
+    answerType: string = "word";
     options: IOptions[] | null = null;
     isVisible: boolean = false;
     customType:true|false = false;
     totalCorrectAnswers:number[]|undefined = [0];
+    answerTypeArray:string[] = ["word","sentence","paragraph","custom"];
   
     completeQuestion:IQuestion = {
       question : "",

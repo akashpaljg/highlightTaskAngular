@@ -73,6 +73,10 @@ textarea::placeholder{
     align-items: center;
 }
 
+.radio-label{
+    cursor: pointer;
+}
+
 .radio-buttons input[type="radio"] {
     transform: scale(1.5); /* Adjust the scale factor as needed */
     margin-right: 0.7rem; /* Maintain spacing after scaling */

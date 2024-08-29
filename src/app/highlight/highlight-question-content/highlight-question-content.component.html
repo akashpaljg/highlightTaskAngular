@@ -18,14 +18,12 @@
                 <div class="radio-button-section">
                     <div class="label-style">Set Answer Type*</div>
                         <div class="radio-buttons">
-                            <input type="radio" id="word" (change)="updateVisibility()" name="drone" value="word" [(ngModel)]="answerType" />
-                            <label for="word">Word</label>
-                            <input type="radio" id="sentence" (change)="updateVisibility()" name="drone" value="sentence" [(ngModel)]="answerType" />
-                            <label for="sentence">Sentence</label>
-                            <input type="radio" id="paragraph" (change)="updateVisibility()" name="drone" value="paragraph" [(ngModel)]="answerType" />
-                            <label for="paragraph">Paragraph</label>
-                            <input type="radio" id="custom" (change)="updateVisibility()" name="drone" value="custom" [(ngModel)]="answerType" />
-                            <label for="custom">Custom</label>
+                           
+
+                            <ng-container *ngFor="let item of answerTypeArray">
+                                <input type="radio" id="{{item}}" (change)="updateVisibility()" name="drone" value="{{item}}" [(ngModel)]="answerType"  />
+                                <label class="radio-label" for="{{item}}">{{item | capitalize}}</label>
+                            </ng-container>
                         </div>
                     </div>
             </form>
