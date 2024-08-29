@@ -55,7 +55,7 @@ export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit 
       this.service.getVisibility().subscribe((value)=>{
         this.isVisible = value;
       })
-      this.service.setIsPreview(false);
+      // this.service.setIsPreview(false);
     }
 
     ngAfterViewInit(): void {
