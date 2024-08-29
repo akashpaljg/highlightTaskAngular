@@ -33,19 +33,21 @@ export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit 
 
       this.service.getCompleteQuestion().subscribe((value)=>{
         if(!value){return;}
+        console.log(`Data Loaded: ${value.question} ${value.textPhrase}`)
         this.question = value.question;
         this.textPhrase = value.textPhrase;
         this.adjustTextareaHeight();
       })
 
-        this.service.getOptions().subscribe((value)=>{
+      this.service.getOptions().subscribe((value)=>{
           this.options = value;
-        });
+      });
       
       
       this.service.getTotalCorrectAnswer().subscribe((value:number[])=>{
         this.totalCorrectAnswers = value;
       });
+
       this.service.getVisibility().subscribe((value)=>{
         this.isVisible = value;
       })
@@ -59,16 +61,16 @@ export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit 
 
     private adjustTextareaHeight(): void {
       setTimeout(() => {
-        const textarea = this.el.nativeElement.querySelector('.textPhrase');
-        if (textarea) { 
-          console.log('Adjusting textarea height');
-          console.log(`Textare scroll height: ${textarea.scrollHeight}`)
-          this.renderer.setStyle(textarea, 'height', 'auto');
-          this.renderer.setStyle(textarea, 'height', `${textarea.scrollHeight}px`);
-        } else {
-          console.log('Textarea not ready, retrying...');
-          setTimeout(() => this.adjustTextareaHeight(), 500);
-        }
+        let textarea = this.el.nativeElement.querySelectorAll('.textPhrase');
+        textarea.forEach((t: any)=>{
+          if (t) { 
+            this.renderer.setStyle(t, 'height', 'auto');
+            this.renderer.setStyle(t, 'height', `${t.scrollHeight}px`);
+          } else {
+            setTimeout(() => this.adjustTextareaHeight(), 500);
+          }
+        })
+        
       }, 0);
     }
 
@@ -199,31 +201,32 @@ export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit 
     }
   
     updateVisibility(): void {
+      this.completeQuestion.question = this.question;
+      this.completeQuestion.textPhrase = this.textPhrase;
+
       if (this.question !== "" && this.textPhrase !== "" && this.answerType !== "") {
         this.options = this.getSelector(this.textPhrase, this.answerType);
         // to update the correct answer count
         if(this.options) this.service.setOptions(this.options);
-        
-        this.completeQuestion.question = this.question;
-        this.completeQuestion.textPhrase = this.textPhrase;
+        console.log(`Update Visibility: ${this.question} ${this.textPhrase}`);
+       
         this.completeQuestion.options = this.options?this.options:[];
-
         this.service.setCompleteQuestion(this.completeQuestion);
+
         this.service.setVisibility(true);
       } else {
-        this.completeQuestion.question = this.question;
-        this.completeQuestion.textPhrase = this.textPhrase;
+        console.log(`Update Visibility: ${this.question} ${this.textPhrase}`);
         this.service.setCompleteQuestion(this.completeQuestion);
         this.service.setIsPreview(false);
         this.service.setVisibility(false);
       }
   
-
-      console.log(`${this.question} ${this.textPhrase} ${this.answerType}`)
+      console.log(`${this.question}`)
     }
   
   
     autoResize(event: Event): void {
+      this.updateVisibility();
       this.adjustTextareaHeight();
     }
   

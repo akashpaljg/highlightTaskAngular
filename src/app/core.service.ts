@@ -48,8 +48,8 @@ export class CoreService {
     console.log('Complete Question set');
   }
 
-  getCompleteQuestion(): BehaviorSubject<IQuestion | null> {
-    return this.completeQuestion;
+  getCompleteQuestion(): Observable<IQuestion | null>  {
+    return this.completeQuestion.asObservable();
   }
 
   // Select Validator
@@ -58,7 +58,7 @@ export class CoreService {
   }
 
   getValidateSelect(): Observable<boolean> {
-    return this.validateSelect;
+    return this.validateSelect.asObservable()
   }
 
   // Highlight save and preview section
@@ -67,7 +67,7 @@ export class CoreService {
   }
 
   getIsPreview(): Observable<boolean> {
-    return this.isPreview;
+    return this.isPreview.asObservable();
   }
 
   // Playing with options
@@ -77,7 +77,7 @@ export class CoreService {
   }
 
   getOptions(): Observable<IOptions[]> {
-    return this.options;
+    return this.options.asObservable();
   }
 
   // Total Correct Answers
@@ -86,7 +86,7 @@ export class CoreService {
   }
 
   getTotalCorrectAnswer(): Observable<number[]> {
-    return this.totalCorrectAnswers;
+    return this.totalCorrectAnswers.asObservable();
   }
 
   editOptions() {

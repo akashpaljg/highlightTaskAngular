@@ -6,7 +6,7 @@
                         <label class="label-style" for="question">Question (Stem)*</label>
                         <label class="label-style">* Fields are required</label>
                     </div>
-                    <textarea type="text" name="question" placeholder="Enter Question (Stem)" (blur)="updateVisibility()" (change)="updateVisibility()" id="question" (input)="autoResize($event)"
+                    <textarea class="textPhrase" type="text" name="question" placeholder="Enter Question (Stem)" (blur)="updateVisibility()" (change)="updateVisibility()" id="question" (input)="autoResize($event)"
                     (keydown)="onEnter($event)" [(ngModel)]="question" rows="1" ></textarea>
                 </div>
                 
