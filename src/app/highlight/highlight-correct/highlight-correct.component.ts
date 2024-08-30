@@ -59,6 +59,7 @@ export class HighlightCorrectComponent implements OnInit {
     this.isChecked = !this.isChecked;
     if(this.isChecked){
       this.setSelection();
+      this.service.setValidateSelect(false);
     }else{
       this.clearSelection();
     }
@@ -105,9 +106,11 @@ export class HighlightCorrectComponent implements OnInit {
     :
     false;
   }
-  handleCorrectClick():void{
+
+  handleCorrectClick(): void {
     this.service.setValidateSelect(!this.isDisableSelect);
   }
+  
   
   
   
