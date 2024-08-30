@@ -37,9 +37,14 @@
             <div class="answer-selected-section">
                 <label for="answer-select">Maximum number of answers that can be selected*:</label>
                 <select name="answer" id="answer-select">
-                    <option *ngFor="let answer of totalCorrectAnswers" [value]="answer" selected>{{answer}}</option>
+                    <option *ngFor="let answer of totalCorrectAnswers" 
+                            [value]="answer" 
+                            [selected]="answer === totalCorrectAnswers[totalCorrectAnswers.length - 1]">
+                        {{answer}}
+                    </option>
                 </select>
             </div>
+            
 
         
 

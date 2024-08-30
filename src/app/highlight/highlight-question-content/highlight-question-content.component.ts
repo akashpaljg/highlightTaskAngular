@@ -16,7 +16,7 @@ export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit 
     options: IOptions[] | null = null;
     isVisible: boolean = false;
     customType:true|false = false;
-    totalCorrectAnswers:number[]|undefined = [0];
+    totalCorrectAnswers:number[] = [0];
     answerTypeArray:string[] = ["word","sentence","paragraph","custom"];
   
     completeQuestion:IQuestion = {

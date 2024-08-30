@@ -161,14 +161,21 @@ export class CoreService {
     if (!options) {
       return;
     }
-
+  
     let total = 0;
     options.forEach((o: IOptions) => {
-      total = o.isCorrect ? total + 1 : total;
+      if (o.isCorrect) {
+        total += 1;
+      }
     });
-    const answer = Array.from({ length: total }, (_, i) => i + 1)
-    this.setTotalCorrectAnswer(answer);
+  
+    // Generate an array starting from 0 up to `total - 1`
+    const answer = Array.from({ length: total }, (_, i) => i+1);
+  
+    // If there are no correct answers, set [0] as the answer
+    this.setTotalCorrectAnswer(answer.length > 0 ? answer : [0]);
   }
+  
 
   checkPreview(completeQuestion: IQuestion): boolean {
     if (!completeQuestion.question.trim() || !completeQuestion.textPhrase.trim()) {
