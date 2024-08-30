@@ -32,14 +32,13 @@ export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit 
     }
   
     ngOnInit(): void {
-
       this.service.getCompleteQuestion().subscribe((value)=>{
         if(!value){return;}
         console.log(`Data Loaded: ${value.question} ${value.textPhrase}`)
         this.question = value.question;
         this.textPhrase = value.textPhrase;
         this.answerType = value.answerType;
-        this.customType = this.answerType === "custom" ? true:false;
+        this.customType = this.answerType === "custom";
         this.adjustTextareaHeight();
       })
 
@@ -55,7 +54,6 @@ export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit 
       this.service.getVisibility().subscribe((value)=>{
         this.isVisible = value;
       })
-      // this.service.setIsPreview(false);
     }
 
     ngAfterViewInit(): void {
@@ -89,120 +87,24 @@ export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit 
   
     getSelector(textPhrase: string, answerType: string): IOptions[] | null {
       
-      this.service.setConcateWords(false);
-      this.customType = false;
+      this.service.setConcateWords(answerType === "word");
+      this.customType = answerType === "custom";
+
   
-      if (answerType === "word") {
-        this.service.setConcateWords(true);
-        return this.getWordOptions(textPhrase);
-      } else if (answerType === "sentence") {
-        return this.getSentenceOptions(textPhrase);
-      } else if(answerType === "paragraph"){
-        return this.getParagraphOptions(textPhrase);
-      } else if(answerType === "custom"){
-        this.customType = true;
-        return this.getWordOptions(textPhrase);
+      switch (answerType) {
+        case "word":
+          return this.service.getWordOptions(textPhrase);
+        case "sentence":
+          return this.service.getSentenceOptions(textPhrase);
+        case "paragraph":
+          return this.service.getParagraphOptions(textPhrase);
+        case "custom":
+          return this.service.getWordOptions(textPhrase);
+        default:
+          return null;
       }
-      return null;
     }
   
-    getWordOptions(textPhrase: string): IOptions[] {
-      // Return an empty array if textPhrase is empty, null, or undefined
-      if (!textPhrase || textPhrase.trim() === "") {
-        return [];
-      }
-    
-      // Split the text into paragraphs
-      const paragraphs = textPhrase.split(/\n+/);
-    
-      // Process each paragraph
-      const processedParagraphs = paragraphs.map(paragraph => {
-        const wordOptions: string[] = paragraph
-          .split(/(\s+)/)
-          .map(word => word.trim())
-          .filter(word => word.length > 0);
-    
-        return wordOptions.map((word) => ({
-          word: word,
-          isSelected: false,
-          isCorrect: false
-        }));
-      });
-    
-      // Flatten the array of paragraphs, inserting a newline object between paragraphs
-      return processedParagraphs.reduce((acc, paragraph, index) => {
-        if (index > 0) {
-          acc.push({ word: '\n', isSelected: false, isCorrect: false });
-        }
-        return acc.concat(paragraph);
-      }, []);
-    }
-  
-    getSentenceOptions(textPhrase: string): IOptions[] {
-      // Split the text by paragraphs first
-      const paragraphs: string[] = textPhrase.split(/\n+/);
-    
-      let sentenceOptions: IOptions[] = [];
-    
-      paragraphs.forEach(paragraph => {
-        // Use a regular expression to split the paragraph into sentences, keeping the full stops
-        const sentences = paragraph.match(/[^.!?]+[.!?]*/g) || []; 
-    
-        sentences.forEach(sentence => {
-          sentenceOptions.push({
-            word: sentence.trim(),
-            isSelected: false,
-            isCorrect: false
-          });
-        });
-    
-        // Add a paragraph separator if needed (optional)
-        sentenceOptions.push({
-          word: '\n', // Represents a paragraph break
-          isSelected: false,
-          isCorrect: false
-        });
-      });
-    
-      // Remove the last paragraph separator if it's not needed
-      if (sentenceOptions[sentenceOptions.length - 1].word === '\n') {
-        sentenceOptions.pop();
-      }
-    
-      return sentenceOptions;
-    }
-  
-    getParagraphOptions(textPhrase: string): IOptions[] {
-      // Split the text into paragraphs using one or more newline characters as the delimiter
-      const paragraphOptions: string[] = textPhrase.split(/\n+/);
-    
-      // Map each paragraph into the required structure
-      let result: IOptions[] = [];
-    
-      paragraphOptions.forEach((paragraph, index) => {
-        // Trim the paragraph to remove leading/trailing whitespace
-        paragraph = paragraph.trim();
-    
-        if (paragraph.length > 0) {
-          result.push({
-            word: paragraph,
-            isSelected: false,
-            isCorrect: false
-          });
-    
-          // Add a separator for the paragraph, using '\n' to represent the separation
-          if (index < paragraphOptions.length - 1) {
-            result.push({
-              word: '\n', // This represents a paragraph break
-              isSelected: false,
-              isCorrect: false
-            });
-          }
-        }
-      });
-    
-      return result;
-    }
   
     updateVisibility(): void {
       this.completeQuestion.question = this.question;
@@ -234,14 +136,14 @@ export class HighlightQuestionContentComponent implements OnInit ,AfterViewInit 
     }
   
   
-    autoResize(event: Event): void {
+    autoResize(): void {
       this.updateVisibility();
       this.adjustTextareaHeight();
     }
   
     onEnter(event: KeyboardEvent): void {
       if (event.key === 'Enter') {
-        this.autoResize(event);
+        this.autoResize();
       }
     }
 
