@@ -67,7 +67,7 @@ export class HighlightCustomComponent implements OnInit {
     return -1;
   }
 
-  updateWordStates(startWord: number, endWord: number): void {
+  private updateWordStates(startWord: number, endWord: number): void {
     for (let i = startWord; i <= endWord; i++) {
       this.wordStates[i].isSelected = !this.wordStates[i].isSelected;
       if (!this.wordStates[i].isSelected) {
