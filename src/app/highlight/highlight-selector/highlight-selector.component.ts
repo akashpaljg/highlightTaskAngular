@@ -16,7 +16,7 @@ export class HighlightSelectorComponent implements OnInit {
   isChecked:true|false = false;
   validateSelect:boolean = false;
 
-  inderminateState:boolean = false;
+  indeterminate:boolean = false;
  
 
  
@@ -171,10 +171,10 @@ export class HighlightSelectorComponent implements OnInit {
     .every(w => w.isSelected)
     :
     false;
-    this.inderminateState = this.isChecked ? false:this.updateInderminateState();
+    this.indeterminate = this.isChecked ? false:this.updateIndeterminateState();
   }
 
-  updateInderminateState():boolean{
+  updateIndeterminateState():boolean{
     return this._currentSelectors.length > 0 ? 
     this._currentSelectors
     .filter(w => w.word.trim() !== '')  
