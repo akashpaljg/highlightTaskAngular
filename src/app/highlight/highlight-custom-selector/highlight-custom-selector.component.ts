@@ -131,6 +131,7 @@ export class HighlightCustomComponent implements OnInit {
       } 
       this.emitSelectors();
   }
+  
   getOriginalWords(mergedWord: string): IOptions[] {
     const words = mergedWord.split(/(\s+)/)
     .map(word => word.trim())

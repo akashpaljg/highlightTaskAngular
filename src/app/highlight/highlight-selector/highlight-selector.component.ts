@@ -82,60 +82,7 @@ export class HighlightSelectorComponent implements OnInit {
     }
   }
 
-  // updateSelectors(): void {
-  //   if (!this._currentSelectors) return;
 
-  //   let newSelectors: IOptions[] = [];
-  //   let currentGroup: IOptions[] = [];
-
-  //   for (let wordState of this._currentSelectors) {
-  //     if (wordState.isSelected) {
-  //       // If the word is selected, add it to the current group
-  //       currentGroup.push(wordState);
-  //     } else {
-  //       // If the word is not selected, merge the current group if it's not empty,
-  //       // then add the unselected word as a standalone item
-  //       if (currentGroup.length > 0) {
-  //         newSelectors.push(this.mergeWordStates(currentGroup));
-  //         currentGroup = [];
-  //       }
-  //       newSelectors.push(wordState);
-  //     }
-  //   }
-
-  //   // After the loop, merge any remaining selected words
-  //   if (currentGroup.length > 0) {
-  //     newSelectors.push(this.mergeWordStates(currentGroup));
-  //   }
-
-  //   console.log(newSelectors);
-
-  //   // Update the _currentSelectors with the new selectors
-  //   this._currentSelectors = newSelectors;
-  // }
-
-  // mergeWordStates(group: IOptions[]): IOptions {
-  //   return {
-  //     word: group.map(w => w.word).join(' '),
-  //     isSelected: true,
-  //     isCorrect: group.every(w => w.isCorrect)
-  //   };
-  // }
-
-  // getOriginalWords(mergedWord: string): IOptions[] {
-  //   const words = mergedWord.split(/(\s+)/)
-  //   .map(word => word.trim())
-  //   .filter(word => word.length > 0);
-
-  //   return words.map(word => {
-  //     const originalWord = this._originalSelectors.find(w => w.word === word);
-  //     return {
-  //       word: word,
-  //       isSelected: false,
-  //       isCorrect: originalWord ? originalWord.isCorrect : false
-  //     };
-  //   });
-  // }
 
   get currentSelectors(): IOptions[] {
     return this._currentSelectors;
