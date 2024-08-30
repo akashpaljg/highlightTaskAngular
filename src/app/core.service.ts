@@ -187,4 +187,104 @@ export class CoreService {
 
     return selectedCount > 0 && correctCount > 0;
   }
+
+  getWordOptions(textPhrase: string): IOptions[] {
+    // Return an empty array if textPhrase is empty, null, or undefined
+    if (!textPhrase || textPhrase.trim() === "") {
+      return [];
+    }
+  
+    // Split the text into paragraphs
+    const paragraphs = textPhrase.split(/\n+/);
+  
+    // Process each paragraph
+    const processedParagraphs = paragraphs.map(paragraph => {
+      const wordOptions: string[] = paragraph
+        .split(/(\s+)/)
+        .map(word => word.trim())
+        .filter(word => word.length > 0);
+  
+      return wordOptions.map((word) => ({
+        word: word,
+        isSelected: false,
+        isCorrect: false
+      }));
+    });
+  
+    // Flatten the array of paragraphs, inserting a newline object between paragraphs
+    return processedParagraphs.reduce((acc, paragraph, index) => {
+      if (index > 0) {
+        acc.push({ word: '\n', isSelected: false, isCorrect: false });
+      }
+      return acc.concat(paragraph);
+    }, []);
+  }
+
+  getSentenceOptions(textPhrase: string): IOptions[] {
+    // Split the text by paragraphs first
+    const paragraphs: string[] = textPhrase.split(/\n+/);
+  
+    let sentenceOptions: IOptions[] = [];
+  
+    paragraphs.forEach(paragraph => {
+      // Use a regular expression to split the paragraph into sentences, keeping the full stops
+      const sentences = paragraph.match(/[^.!?]+[.!?]*/g) || []; 
+  
+      sentences.forEach(sentence => {
+        sentenceOptions.push({
+          word: sentence.trim(),
+          isSelected: false,
+          isCorrect: false
+        });
+      });
+  
+      // Add a paragraph separator if needed (optional)
+      sentenceOptions.push({
+        word: '\n', // Represents a paragraph break
+        isSelected: false,
+        isCorrect: false
+      });
+    });
+  
+    // Remove the last paragraph separator if it's not needed
+    if (sentenceOptions[sentenceOptions.length - 1].word === '\n') {
+      sentenceOptions.pop();
+    }
+  
+    return sentenceOptions;
+  }
+
+  getParagraphOptions(textPhrase: string): IOptions[] {
+    // Split the text into paragraphs using one or more newline characters as the delimiter
+    const paragraphOptions: string[] = textPhrase.split(/\n+/);
+  
+    // Map each paragraph into the required structure
+    let result: IOptions[] = [];
+  
+    paragraphOptions.forEach((paragraph, index) => {
+      // Trim the paragraph to remove leading/trailing whitespace
+      paragraph = paragraph.trim();
+  
+      if (paragraph.length > 0) {
+        result.push({
+          word: paragraph,
+          isSelected: false,
+          isCorrect: false
+        });
+  
+        // Add a separator for the paragraph, using '\n' to represent the separation
+        if (index < paragraphOptions.length - 1) {
+          result.push({
+            word: '\n', // This represents a paragraph break
+            isSelected: false,
+            isCorrect: false
+          });
+        }
+      }
+    });
+  
+    return result;
+  }
+
+  
 }
