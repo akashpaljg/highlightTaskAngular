@@ -66,6 +66,28 @@
   transform: translate(-60%, -60%) rotate(45deg);
   transition: all 0.2s ease;
 }
+
+.label-checkbox > input[type=checkbox]:indeterminate::before {
+  content: "";
+  display: block;
+    border: none;
+    width: 16px;
+    height: 16px;
+    background-color: #1f7a54;
+}
+
+.label-checkbox > input[type=checkbox]:indeterminate::after {
+  content: "";
+  display: block;
+  width: 11px;
+  height: 11px;
+  border: solid white;
+  border-width: 3px 0 0 0;
+  position: absolute;
+  top: 6px;
+  left: 1.5px;
+}
+
 .label-checkbox > input[type="checkbox"]:disabled{
   opacity: 0.4;
   cursor: default;

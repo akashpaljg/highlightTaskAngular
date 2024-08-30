@@ -14,6 +14,7 @@ export class HighlightCorrectComponent implements OnInit {
   isValueSelected:true|false = false;
   isDisableSelect:boolean = true;
   visible:boolean = false;
+  indeterminate:boolean = false;
 
 
   
@@ -89,11 +90,21 @@ export class HighlightCorrectComponent implements OnInit {
   
     // If no words are selected, isChecked should be false
     this.isChecked = selectedWords.length > 0 && selectedWords.every(w => w.isCorrect);
+    this.indeterminate = this.isChecked ? false:this.updateIndeterminateState();
     this.isDisableSelect =  selectedWords.length > 0;
   
     console.log(`Is Checked: ${this.isChecked}`);
   }
 
+
+  updateIndeterminateState():boolean{
+    return (this._selectors && this._selectors.length > 0) ? 
+    this._selectors
+    .filter(w => w.word.trim() !== '')  
+    .some(w => w.isCorrect)
+    :
+    false;
+  }
   handleCorrectClick():void{
     this.service.setValidateSelect(!this.isDisableSelect);
   }

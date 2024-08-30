@@ -2,7 +2,7 @@
   <div class="label-style form-labels">
     <label class="">Set Correct Answers*</label>
     <div class="label-checkbox" [class.notVisible]="!isDisableSelect">
-      <input type="checkbox" id="scales" name="scales" [disabled]="!isDisableSelect" (change)="onCheck()" [checked]="isChecked" />
+      <input type="checkbox" id="scales" name="scales" [disabled]="!isDisableSelect" (change)="onCheck()" [indeterminate]="indeterminate" [checked]="isChecked" />
       <label for="scales">Select All</label>
     </div>
   </div>
