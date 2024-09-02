@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, Renderer2, ElementRef, OnDestroy } from '@angular/core';
 import { CoreService } from 'src/app/core.service';
 import { IOptions } from 'src/app/shared/interface';
 
@@ -8,12 +8,13 @@ import { IOptions } from 'src/app/shared/interface';
   templateUrl: './highlight-custom-selector.component.html',
   styleUrls: ['./highlight-custom-selector.component.css']
 })
-export class HighlightCustomComponent implements OnInit {
+export class HighlightCustomComponent implements OnInit,OnDestroy {
   private _originalSelectors: IOptions[] = [];
   wordStates: IOptions[] = [];
   isValueSelected:true|false = false;
   visible:boolean = false;
   validateSelect:boolean = false;
+  removeListener:any|null = null;
 
   constructor(private renderer: Renderer2, private el: ElementRef,private service:CoreService) {
    
@@ -38,10 +39,17 @@ export class HighlightCustomComponent implements OnInit {
     })
   }
 
+  // cleanup function
+  ngOnDestroy():void{
+    if(this.removeListener){
+      this.removeListener();
+    }
+  }
+
   initializeEventListeners(): void {
     const container = this.el.nativeElement.querySelector('.highlight-container');
     if (container) {
-      this.renderer.listen(container, 'mouseup', (e: MouseEvent) => this.handleSelection(e));
+      this.removeListener = this.renderer.listen(container, 'mouseup', (e: MouseEvent) => this.handleSelection(e));
     }
   }
 
@@ -103,7 +111,7 @@ export class HighlightCustomComponent implements OnInit {
   
     this.wordStates = newSelectors;
   }
-  
+
   mergeWordStates(group: IOptions[]): IOptions {
     return {
       word: group.map(w => w.word).join(' '),
@@ -115,7 +123,6 @@ export class HighlightCustomComponent implements OnInit {
   emitSelectors(): void {
     this.service.setOptions([...this.wordStates]);
   }
-
 
   toggleSelection(index: number): void {
     if (index < 0 || index >= this.wordStates.length) return;
@@ -131,7 +138,7 @@ export class HighlightCustomComponent implements OnInit {
       } 
       this.emitSelectors();
   }
-  
+
   getOriginalWords(mergedWord: string): IOptions[] {
     const words = mergedWord.split(/(\s+)/)
     .map(word => word.trim())
